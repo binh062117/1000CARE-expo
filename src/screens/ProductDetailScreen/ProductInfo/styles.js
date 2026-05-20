@@ -1,0 +1,267 @@
+import { StyleSheet } from 'react-native'
+import Colors from '~/common/Colors/Colors'
+import dimension from '~/constants/dimens'
+
+export default StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: Colors.backgroundColor,
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingTop: 4,
+  },
+  imagePaginationContainer: {
+    height: 24,
+    width: 50,
+    borderRadius: 35,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 10,
+    right: dimension.common.WINDOW_WIDTH / 2 - 12,
+  },
+  paginationNumber: {
+    color: Colors.white,
+    fontSize: 12,
+  },
+  swiperItemContainer: {
+    backgroundColor: 'transparent',
+    height: dimension.common.WINDOW_HEIGHT * 0.23,
+    alignItems: 'center',
+  },
+  swiperItem: {
+    width: dimension.common.WINDOW_WIDTH,
+    height: dimension.common.WINDOW_WIDTH * 2 / 3,
+  },
+  productInfoContainer: {
+    flex: 2,
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    justifyContent: 'space-around',
+    padding: 18,
+  },
+  productContainer: {
+    marginBottom: 6,
+    backgroundColor: Colors.white,
+  },
+
+  quantityContainer: {
+    display: 'flex',
+    backgroundColor: 'white',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 18,
+  },
+  btnAddContainer: {
+    margin: 0,
+    flexDirection: 'row',
+    paddingHorizontal: 0,
+    marginHorizontal: 16,
+    marginBottom: 18,
+  },
+  btnAdd: {
+    borderRadius: 28,
+    backgroundColor: Colors.systemColor2,
+    flex: 1,
+  },
+  quantityBtnContainer: {
+    flexDirection: 'row',
+    margin: 0,
+    padding: 0,
+    alignItems: 'center',
+    paddingHorizontal: 0,
+  },
+  quantityBtn: {
+    height: 36,
+    width: 36,
+    padding: 0,
+    paddingHorizontal: 0,
+    borderRadius: 36,
+    backgroundColor: '#FAFAFA',
+  },
+  productQuantityContainer: {
+    borderRadius: 28,
+    width: 84,
+    marginHorizontal: 8,
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    fontSize: 14,
+    color: Colors.textColor3,
+  },
+  inputContainerStyle: {
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: 28,
+    alignItems: 'center',
+  },
+  labelStyle: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  productQuantity: {
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    fontSize: 14,
+    color: Colors.textColor2,
+  },
+  title: {
+    color: Colors.textColor1,
+    fontWeight: 'bold',
+    marginBottom: 6,
+    marginRight: 18,
+    fontSize: 16,
+  },
+  pack: {
+    color: Colors.textColor2,
+    fontSize: 14,
+    fontWeight: '700',
+    lineHeight: 22,
+  },
+  sectiontitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#595959',
+  },
+  swiperConatainer: {
+    backgroundColor: Colors.white,
+    height: (dimension.common.WINDOW_WIDTH - 36) * 2 / 3,
+    marginBottom: 1,
+  },
+  priceInfoContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 18,
+  },
+  priceContainer: {
+    borderRadius: 36,
+    borderColor: Colors.priceColor,
+    borderWidth: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+  productPrice: {
+    color: Colors.priceColor,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  actionCountContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  actionCountItemContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginLeft: 18,
+  },
+  countValue: {
+    marginLeft: 8,
+  },
+  rangePricesContainer: {
+    flex: 1,
+    padding: 18,
+    backgroundColor: Colors.white,
+    marginBottom: 8,
+  },
+  promotionTitle: {
+    color: Colors.textColor2,
+    textAlign: 'left',
+    fontSize: 14,
+    lineHeight: 22,
+    fontWeight: '700',
+    marginBottom: 12,
+  },
+  infoSectionTitle: {
+    color: Colors.textColor2,
+    textAlign: 'left',
+    fontSize: 14,
+    lineHeight: 22,
+    fontWeight: '700',
+    marginBottom: 18,
+    marginHorizontal: 18,
+  },
+  tabTitle: {
+    display: 'flex',
+    flexDirection: 'row',
+    borderRadius: 42,
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+    padding: 4,
+    alignSelf: 'center',
+  },
+  tabSelected: {
+    backgroundColor: Colors.white,
+    color: Colors.systemColor2,
+    fontWeight: '700',
+  },
+  tabContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: Colors.backgroundColor,
+    borderRadius: 42,
+    padding: 4,
+    alignSelf: 'center',
+    marginBottom: 18,
+  },
+  tabText: {
+    color: Colors.textColor1,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontWeight: '500',
+    fontSize: 14,
+    lineHeight: 22,
+  },
+  iconWhitelist: {
+    height: 25,
+    width: 28,
+  },
+  iconWhitelistContainer: {
+    height: 25,
+    width: 28,
+    flex: 1,
+  },
+  productNameContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  slider: {
+    marginTop: 4,
+  },
+
+  sliderItem: {
+    height: 136,
+    width: '100%',
+  },
+
+  dot: {
+    width: 6,
+    height: 6,
+  },
+
+  dotContainer: {
+    marginHorizontal: 3,
+  },
+
+  paginationBox: {
+    paddingVertical: 8,
+  },
+
+  rightButtonContainer: {
+    position: 'absolute',
+    top: 16 / 2,
+    right: 16 / 2,
+    backgroundColor: '#FFFFFF66',
+    padding: 6,
+    borderRadius: 12,
+  },
+})

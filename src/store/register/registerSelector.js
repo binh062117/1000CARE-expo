@@ -1,0 +1,9 @@
+export const getSignUpReqId = state => state.register.requestId
+export const getSignUpStatus = state => state.register.signupStatus
+export const getSignUpError = state => state.register.signUpError
+export const getConfirmSignUpStatus = state => state.register.confirmStatus
+export const getConfirmSignUpError = state => state.register.confirmError
+export const getUpdateProfileStatus = state => state.register.updateProfileStatus
+export const getUpdateProfileError = state => state.register.updateProfileError
+export const getUpdateIdentityStatus = state => state.register.updateIdentityStatus
+export const getUpdateIdentityError = state => state.register.updateIdentityError

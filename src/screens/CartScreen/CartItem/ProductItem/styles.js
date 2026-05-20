@@ -1,0 +1,167 @@
+import { StyleSheet } from 'react-native'
+import { Fonts } from '~/assets/config'
+import Colors from '~/common/Colors/Colors'
+
+export default StyleSheet.create({
+  productContainer: {
+    backgroundColor: Colors.white,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    marginBottom: 4,
+    paddingLeft: 8,
+  },
+  logo: {
+    width: 109,
+    height: 120,
+    resizeMode: 'cover',
+  },
+  logoContainer: {
+    width: 120,
+    // height: 100,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnCloseContainer: {
+    paddingTop: 12,
+    width: 32,
+    height: 32,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  btnClose: {
+    width: 12,
+    height: 12,
+  },
+  productInfoContainer: {
+    flex: 2,
+    display: 'flex',
+    paddingVertical: 8,
+    marginLeft: 9,
+    justifyContent: 'space-between',
+  },
+  priceContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 16,
+    justifyContent: 'space-between',
+  },
+  paymentPriceContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  price: {
+    color: Colors.systemColor2,
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  
+  salePrice: {
+    color: Colors.red,
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  discount: {
+    color: Colors.errorColor,
+    fontSize: 12,
+  },
+  quantityBtnContainer: {
+    flexDirection: 'row',
+    margin: 0, 
+    padding: 0,
+    height: 34,
+    alignItems: 'center', 
+    display: 'flex',
+    justifyContent: 'center',
+    paddingHorizontal: 0,
+  },
+  quantityBtn: {
+    width: 36,
+    height: 34,
+    padding: 0,
+    paddingHorizontal: 0,
+    // borderRadius: 36,
+    backgroundColor: '#FAFAFA',
+  },
+  productQuantity: {
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    fontSize: 10,
+    color: Colors.textColor3,
+  },
+  productQuantityContainer: {
+    borderRadius: 28,
+    width: 48,
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    fontSize: 10,
+    marginHorizontal: 2,
+    color: Colors.textColor3,
+  },
+  productName:{
+    color: Colors.textColor2,
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  inputContainerStyle: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 0,
+    margin: 0,
+    minHeight: 34,
+    alignItems: 'center',
+  },
+  labelStyle: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: 0,
+    fontSize: 10,
+    lineHeight: 10,
+    alignItems: 'center',
+  },
+  comboPromotionContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 6,
+  },
+  originPrice: {
+    marginLeft: 2,
+    fontSize: 12,
+    color: '#CCCCCC',
+    lineHeight: 20,    
+    textDecorationLine: 'line-through',
+  },
+
+  infoContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 6,
+  },
+  priceLabel: {
+    display: 'flex',
+    flexDirection: 'row',
+    fontSize: 14,
+    fontWeight: '500',
+    marginRight: 6,
+    fontFamily: Fonts.meidum,
+  },
+  promotionLabel: {
+    height: 18,
+    width: 18,
+    marginLeft: 8,
+  },
+  overlay: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(114, 114, 114, 0.8)',
+    position: 'absolute',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})

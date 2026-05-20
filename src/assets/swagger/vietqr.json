@@ -1,0 +1,2049 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Neomed API",
+        "description": "Neomed API\n",
+        "version": "1.0.0",
+        "termsOfService": "https://ciaolink.net/",
+        "contact": {
+            "email": "support@ciaolink.net"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/payments",
+    "paths": {
+        "/bank/ncb/callback": {
+            "post": {
+                "tags": [
+                    "bank"
+                ],
+                "description": "Transaction callback from NCB Payment\n\u003cbr\u003e",
+                "operationId": "BankController.NCB callback",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.NcbCallbackRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.NcbCallbackResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/bank/ncb/qr": {
+            "post": {
+                "tags": [
+                    "bank"
+                ],
+                "description": "Create a redirect payment URL to NCB\n\u003cbr\u003e",
+                "operationId": "BankController.NcbCreatePayment",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.NcbGenerateQrRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.NcbGenerateQrResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/bank/ncb/{orderId}": {
+            "get": {
+                "tags": [
+                    "bank"
+                ],
+                "description": "Get status NCB\n\u003cbr\u003e",
+                "operationId": "BankController.Get Status",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "orderId",
+                        "description": "orderId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.NcbGetOrderStatusResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/momo/": {
+            "post": {
+                "tags": [
+                    "momo"
+                ],
+                "description": "Create a redirect payment URL to VNPay\n\u003cbr\u003e",
+                "operationId": "MomoController.VNPayCreatePayments",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.MomoCreatePaymentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.VNPayCreatePaymentsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/momo/ipn": {
+            "post": {
+                "tags": [
+                    "momo"
+                ],
+                "description": "Transaction callback from Momo Payment\n\u003cbr\u003e",
+                "operationId": "MomoController.MomoIPNPayment",
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.MomoIPNPaymentRequest"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/momo/refunds": {
+            "post": {
+                "tags": [
+                    "momo"
+                ],
+                "description": "Create a redirect payment URL to VNPay\n\u003cbr\u003e",
+                "operationId": "MomoController.VNPayCreatePayments",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.MomoCreatePaymentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.VNPayCreatePaymentsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/vietqr/api/token_generate": {
+            "post": {
+                "tags": [
+                    "vietqr"
+                ],
+                "description": "Create a token for VietQR\n\u003cbr\u003e",
+                "operationId": "QrController.GenerateToken",
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.PreTokenResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/vietqr/bank": {
+            "get": {
+                "tags": [
+                    "vietqr"
+                ],
+                "description": "Get bank\n\u003cbr\u003e",
+                "operationId": "QrController.BankGet",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "brand_id",
+                        "description": "brand_id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "path",
+                        "name": "merchant_id",
+                        "description": "merchant_id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "path",
+                        "name": "branch_id",
+                        "description": "branch_id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "vietqr"
+                ],
+                "description": "Create a bank for Merchant\n\u003cbr\u003e",
+                "operationId": "QrController.BankPost",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for bank create",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.PreVietQrBankInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/vietqr/bank/api/transaction-sync": {
+            "post": {
+                "tags": [
+                    "vietqr"
+                ],
+                "description": "Transaction callback from VietQR Payment\n\u003cbr\u003e",
+                "operationId": "QrController.VietQr callback",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.PreTransactionSyncRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.PreTransactionSyncResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/vietqr/bank/check/{appTrans}": {
+            "get": {
+                "tags": [
+                    "vietqr"
+                ],
+                "description": "Check payment status for order\n\u003cbr\u003e",
+                "operationId": "QrController.Check payment status",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "appTrans",
+                        "description": "app_trans_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/vietqr/bank/list": {
+            "post": {
+                "tags": [
+                    "vietqr"
+                ],
+                "description": "List banks\n\u003cbr\u003e",
+                "operationId": "QrController.BankList",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for bank list",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.Pagination"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/vietqr/bank/{id}": {
+            "put": {
+                "tags": [
+                    "vietqr"
+                ],
+                "description": "Update a bank for User\n\u003cbr\u003e",
+                "operationId": "QrController.BankPut",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for bank update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.PreVietQrBankInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "vietqr"
+                ],
+                "description": "Delete a bank\n\u003cbr\u003e",
+                "operationId": "QrController.BankDelete",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/vietqr/generate/qr": {
+            "post": {
+                "tags": [
+                    "vietqr"
+                ],
+                "description": "Generate QR from VietQR Payment\n\u003cbr\u003e",
+                "operationId": "QrController.GenerateQR",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.PreGenerateQRRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.PreGenerateQRResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/vnpay/ipn/redirectpayments": {
+            "get": {
+                "tags": [
+                    "vnpay"
+                ],
+                "description": "Transaction callback from VNPay Redirect Payment\n\u003cbr\u003e",
+                "operationId": "VNPayController.VNPayIPNRedirectPayment",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "vnp_Amount",
+                        "description": "Amount",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_BankCode",
+                        "description": "BankCode",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_BankTranNo",
+                        "description": "BankTranNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_CardType",
+                        "description": "CardType",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_OrderInfo",
+                        "description": "OrderInfo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_PayDate",
+                        "description": "PayDate",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_ResponseCode",
+                        "description": "ResponseCode",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_TmnCode",
+                        "description": "TmnCode",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_TransactionNo",
+                        "description": "TransactionNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_TransactionStatus",
+                        "description": "TransactionStatus",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_TxnRef",
+                        "description": "TxnRef",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "vnp_SecureHash",
+                        "description": "SecureHash",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.VNPayIPNRedirectPaymentResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/vnpay/qrcode": {
+            "post": {
+                "tags": [
+                    "vnpay"
+                ],
+                "description": "Create payment QRCode from VNPay\n\u003cbr\u003e",
+                "operationId": "VNPayController.VNPayCreateQRCode",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for QR code request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.VNPayCreateQRCodeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.VNPayCreateQRCodeResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/vnpay/qrcode/trans/{txnId}/status": {
+            "get": {
+                "tags": [
+                    "vnpay"
+                ],
+                "description": "Transaction callback from VNPay\n\u003cbr\u003e",
+                "operationId": "VNPayController.VNPayDynamicQRCodeTransStatus",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "txnId",
+                        "description": "{{ TxnId }} Id giao dịch với VNPay",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.CommonErrResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/vnpay/redirectpayments": {
+            "post": {
+                "tags": [
+                    "vnpay"
+                ],
+                "description": "Create a redirect payment URL to VNPay\n\u003cbr\u003e",
+                "operationId": "VNPayController.VNPayCreatePayments",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.VNPayCreatePaymentsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.VNPayCreatePaymentsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/vnpay/transcallback": {
+            "post": {
+                "tags": [
+                    "vnpay"
+                ],
+                "description": "Transaction callback from VNPay\n\u003cbr\u003e",
+                "operationId": "VNPayController.VNPayCallback",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for transaction callback content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.VNPayTransCallbackRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.VNPayTransCallbackResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/zlp/": {
+            "post": {
+                "tags": [
+                    "zlp"
+                ],
+                "description": "Create a redirect payment URL to Zalopay\n\u003cbr\u003e",
+                "operationId": "ZlpController.ZlpCreatePayment",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.ZlpCreatePaymentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.ZlpCreatePaymentReply"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/zlp/banks": {
+            "get": {
+                "tags": [
+                    "zlp"
+                ],
+                "description": "List banks\n\u003cbr\u003e",
+                "operationId": "ZlpController.List banks",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "brandId",
+                        "description": "brand_id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "branchId",
+                        "description": "branch_id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "merchantId",
+                        "description": "merchant_id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/entity.ZlpBanksReply"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/zlp/banks/deeplink": {
+            "post": {
+                "tags": [
+                    "zlp"
+                ],
+                "description": "List banks deeplink\n\u003cbr\u003e",
+                "operationId": "ZlpController.List banks deeplink",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for banks deeplink request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.BankDeeplinkRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/entity.ZlpBanksDeeplinkReply"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/zlp/callback": {
+            "post": {
+                "tags": [
+                    "zlp"
+                ],
+                "description": "Transaction callback from Zalopay Payment\n\u003cbr\u003e",
+                "operationId": "ZlpController.Zalopay callback",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.ZlpCallbackRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.ZlpCallbackReply"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/zlp/query": {
+            "post": {
+                "tags": [
+                    "zlp"
+                ],
+                "description": "Query state Zalopay Payment\n\u003cbr\u003e",
+                "operationId": "ZlpController.Query state",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.QueryState"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.ZlpQueryStatePaymentReply"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/zlp/query/refund": {
+            "post": {
+                "tags": [
+                    "zlp"
+                ],
+                "description": "Query state refund Zalopay Payment\n\u003cbr\u003e",
+                "operationId": "ZlpController.Query state refund",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.QueryState"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.ZlpQueryStateRefundPaymentReply"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/zlp/refund": {
+            "post": {
+                "tags": [
+                    "zlp"
+                ],
+                "description": "Create a redirect payment URL to Zalopay\n\u003cbr\u003e",
+                "operationId": "ZlpController.VNPayCreatePayments",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for payments request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/presenter.ZlpRefundPaymentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/presenter.ZlpRefundPaymentReply"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "11209.0xc000653980.false": {
+            "title": "false",
+            "type": "object"
+        },
+        "entity.QueryState": {
+            "title": "QueryState",
+            "type": "object",
+            "properties": {
+                "app_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "app_user": {
+                    "description": "user_id",
+                    "type": "string"
+                },
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "category": {
+                    "description": "MOMO or ZALOPAY or VNPAY",
+                    "type": "string"
+                },
+                "m_refund_id": {
+                    "description": "yymmdd_appid_xxxxxxxxxx (refund)",
+                    "type": "string"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "description": "(refund)",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "tx_id": {
+                    "description": "Towards Zalopay: TxID or ZlpAppTransId",
+                    "type": "string"
+                }
+            }
+        },
+        "entity.ZlpBanksDeeplinkReply": {
+            "title": "ZlpBanksDeeplinkReply",
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/entity.interface"
+                },
+                "return_code": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "return_message": {
+                    "type": "string"
+                },
+                "sub_return_code": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "sub_return_message": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.ZlpBanksReply": {
+            "title": "ZlpBanksReply",
+            "type": "object",
+            "properties": {
+                "banks": {
+                    "$ref": "#/definitions/entity.interface"
+                },
+                "returncode": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "returnmessage": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.ZlpCallbackRequest": {
+            "title": "ZlpCallbackRequest",
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "mac": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "1: Order 2: Agreement",
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "entity.interface": {
+            "title": "interface",
+            "type": "object"
+        },
+        "presenter.BankDeeplinkRequest": {
+            "title": "BankDeeplinkRequest",
+            "type": "object",
+            "properties": {
+                "bank_codes": {
+                    "type": "string"
+                },
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "os_type": {
+                    "description": "\"ios or android\"",
+                    "type": "string"
+                },
+                "qr_code": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.CommonErrResponse": {
+            "title": "CommonErrResponse",
+            "type": "object",
+            "properties": {
+                "details": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.DataTxn": {
+            "title": "DataTxn",
+            "type": "object",
+            "properties": {
+                "txnId": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.MomoCreatePaymentRequest": {
+            "title": "MomoCreatePaymentRequest",
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "app_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_name": {
+                    "type": "string"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_info": {
+                    "type": "string"
+                },
+                "order_type": {
+                    "type": "string"
+                },
+                "return_url": {
+                    "type": "string"
+                },
+                "storeId": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "presenter.MomoIPNPaymentRequest": {
+            "title": "MomoIPNPaymentRequest",
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "extraData": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "orderId": {
+                    "type": "string"
+                },
+                "orderInfo": {
+                    "type": "string"
+                },
+                "orderType": {
+                    "type": "string"
+                },
+                "partnerCode": {
+                    "type": "string"
+                },
+                "partnerUserId": {
+                    "type": "string"
+                },
+                "payType": {
+                    "type": "string"
+                },
+                "paymentOption": {
+                    "type": "string"
+                },
+                "requestId": {
+                    "type": "string"
+                },
+                "responseTime": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "resultCode": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "signature": {
+                    "type": "string"
+                },
+                "transId": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "presenter.NcbCallbackRequest": {
+            "title": "NcbCallbackRequest",
+            "type": "object",
+            "properties": {
+                "datetime": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "merchant_data": {
+                    "type": "string"
+                },
+                "merchant_order_id": {
+                    "type": "string"
+                },
+                "ncb_order_id": {
+                    "type": "string"
+                },
+                "payment_amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "signature": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.NcbCallbackResponse": {
+            "title": "NcbCallbackResponse",
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.NcbGenerateQrRequest": {
+            "title": "NcbGenerateQrRequest",
+            "type": "object",
+            "properties": {
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "expiration": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "order_info": {
+                    "type": "string"
+                },
+                "payment_amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "qr_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.NcbGenerateQrResponse": {
+            "title": "NcbGenerateQrResponse",
+            "type": "object",
+            "properties": {
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "payment_amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "viet_qr_content": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.NcbGetOrderStatusResponse": {
+            "title": "NcbGetOrderStatusResponse",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "total_amount": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "presenter.Pagination": {
+            "title": "Pagination",
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "presenter.PreGenerateQRRequest": {
+            "title": "PreGenerateQRRequest",
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.PreGenerateQRResponse": {
+            "title": "PreGenerateQRResponse",
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "description": "keep string to avoid precision issues",
+                    "type": "string"
+                },
+                "app_trans_id": {
+                    "type": "string"
+                },
+                "bank_account": {
+                    "type": "string"
+                },
+                "bank_code": {
+                    "type": "string"
+                },
+                "bank_name": {
+                    "type": "string"
+                },
+                "branch_name": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "existing": {
+                    "description": "\"1\" or \"0\"",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "img_id": {
+                    "type": "string"
+                },
+                "orderId": {
+                    "type": "string"
+                },
+                "qr_code": {
+                    "type": "string"
+                },
+                "qr_link": {
+                    "type": "string"
+                },
+                "user_bank_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.PreTokenResponse": {
+            "title": "PreTokenResponse",
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "expires_in": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "token_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.PreTransactionSyncRequest": {
+            "title": "PreTransactionSyncRequest",
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "bankaccount": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "orderId": {
+                    "type": "string"
+                },
+                "referencenumber": {
+                    "type": "string"
+                },
+                "serviceCode": {
+                    "type": "string"
+                },
+                "sign": {
+                    "type": "string"
+                },
+                "subTerminalCode": {
+                    "type": "string"
+                },
+                "terminalCode": {
+                    "type": "string"
+                },
+                "transType": {
+                    "type": "string"
+                },
+                "transactionid": {
+                    "type": "string"
+                },
+                "transactiontime": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "urlLink": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.PreTransactionSyncResponse": {
+            "title": "PreTransactionSyncResponse",
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "boolean"
+                },
+                "errorReason": {
+                    "type": "string"
+                },
+                "object": {
+                    "$ref": "#/definitions/11209.0xc000653980.false"
+                },
+                "toastMessage": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.PreVietQrBankInfo": {
+            "title": "PreVietQrBankInfo",
+            "type": "object",
+            "properties": {
+                "bank_account": {
+                    "type": "string"
+                },
+                "bank_code": {
+                    "type": "string"
+                },
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_name": {
+                    "type": "string"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "owner_name": {
+                    "type": "string"
+                },
+                "qr_type": {
+                    "description": "- VietQR động: 0 - VietQR tĩnh: 1 - VietQR bán động: 3",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "service_code": {
+                    "description": "Mã sản phẩm, dịch vụ được thanh toán.",
+                    "type": "string"
+                },
+                "sign": {
+                    "description": "Chữ ký.",
+                    "type": "string"
+                },
+                "sub_terminal_code": {
+                    "description": "Mã cửa hàng/điểm bán phụ.",
+                    "type": "string"
+                },
+                "terminal_code": {
+                    "description": "Mã cửa hàng/điểm bán",
+                    "type": "string"
+                },
+                "trans_type": {
+                    "description": "C:giao_dịch_đến/D:giao_dịch_đi",
+                    "type": "string"
+                },
+                "url_link": {
+                    "description": "Trang chuyển đến sau khi quét mã thanh toán.",
+                    "type": "string"
+                },
+                "user_bank_name": {
+                    "type": "string"
+                },
+                "vietqr_info_id": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "presenter.QrCodeItemPayment": {
+            "title": "QrCodeItemPayment",
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "string"
+                },
+                "ccy": {
+                    "type": "string"
+                },
+                "masterMerCode": {
+                    "type": "string"
+                },
+                "merchantCode": {
+                    "type": "string"
+                },
+                "merchantType": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "productId": {
+                    "type": "string"
+                },
+                "qty": {
+                    "type": "string"
+                },
+                "serviceCode": {
+                    "type": "string"
+                },
+                "terminalId": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.VNPayCreatePaymentsRequest": {
+            "title": "VNPayCreatePaymentsRequest",
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "app_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_info": {
+                    "type": "string"
+                },
+                "order_type": {
+                    "type": "string"
+                },
+                "return_url": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "presenter.VNPayCreatePaymentsResponse": {
+            "title": "VNPayCreatePaymentsResponse",
+            "type": "object",
+            "properties": {
+                "redirect_url": {
+                    "type": "string"
+                },
+                "txn_id": {
+                    "type": "string"
+                },
+                "vnp_tmn_code": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.VNPayCreateQRCodeRequest": {
+            "title": "VNPayCreateQRCodeRequest",
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "string"
+                },
+                "app_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_id": {
+                    "type": "string"
+                },
+                "merchant_id": {
+                    "type": "string"
+                },
+                "purpose": {
+                    "type": "string"
+                },
+                "terminal_id": {
+                    "type": "string"
+                },
+                "txn_id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "presenter.VNPayCreateQRCodeResponse": {
+            "title": "VNPayCreateQRCodeResponse",
+            "type": "object",
+            "properties": {
+                "checksum": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "string"
+                },
+                "expiry": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "idQrcode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "txnId": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.VNPayIPNRedirectPaymentResponse": {
+            "title": "VNPayIPNRedirectPaymentResponse",
+            "type": "object",
+            "properties": {
+                "Message": {
+                    "type": "string"
+                },
+                "RspCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.VNPayTransCallbackRequest": {
+            "title": "VNPayTransCallbackRequest",
+            "type": "object",
+            "properties": {
+                "accountNo": {
+                    "type": "string"
+                },
+                "addData": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/presenter.QrCodeItemPayment"
+                    }
+                },
+                "address": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                },
+                "bankCode": {
+                    "type": "string"
+                },
+                "checksum": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "district_id": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "merchantCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                },
+                "msgType": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "payDate": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "province_id": {
+                    "type": "string"
+                },
+                "qrTrace": {
+                    "type": "string"
+                },
+                "terminalId": {
+                    "type": "string"
+                },
+                "txnId": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.VNPayTransCallbackResponse": {
+            "title": "VNPayTransCallbackResponse",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "data": {
+                    "$ref": "#/definitions/presenter.DataTxn"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.ZlpCallbackReply": {
+            "title": "ZlpCallbackReply",
+            "type": "object"
+        },
+        "presenter.ZlpCreatePaymentReply": {
+            "title": "ZlpCreatePaymentReply",
+            "type": "object",
+            "properties": {
+                "app_trans_id": {
+                    "type": "string"
+                },
+                "error_side": {
+                    "type": "string"
+                },
+                "order_token": {
+                    "type": "string"
+                },
+                "order_url": {
+                    "type": "string"
+                },
+                "qr_code": {
+                    "type": "string"
+                },
+                "return_code": {
+                    "description": "1: success 2: fail",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "return_message": {
+                    "type": "string"
+                },
+                "sub_return_code": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "sub_return_message": {
+                    "type": "string"
+                },
+                "zp_trans_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.ZlpCreatePaymentRequest": {
+            "title": "ZlpCreatePaymentRequest",
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_name": {
+                    "type": "string"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "channel": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "device_info": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "redirect_url": {
+                    "type": "string"
+                },
+                "save_binding": {
+                    "description": "true: create order and payment via and save bindingID and pay_token zlp",
+                    "type": "boolean"
+                },
+                "sub_app_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                },
+                "voucher_code": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.ZlpQueryStatePaymentReply": {
+            "title": "ZlpQueryStatePaymentReply",
+            "type": "object"
+        },
+        "presenter.ZlpQueryStateRefundPaymentReply": {
+            "title": "ZlpQueryStateRefundPaymentReply",
+            "type": "object"
+        },
+        "presenter.ZlpRefundPaymentReply": {
+            "title": "ZlpRefundPaymentReply",
+            "type": "object",
+            "properties": {
+                "error_side": {
+                    "type": "string"
+                },
+                "refund_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "return_code": {
+                    "description": "1: sucess 2:fail 3: processing",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "return_message": {
+                    "type": "string"
+                },
+                "sub_return_code": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "sub_return_message": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenter.ZlpRefundPaymentRequest": {
+            "title": "ZlpRefundPaymentRequest",
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "branch_name": {
+                    "type": "string"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "merchant_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "refund_fee_amount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "user_id": {
+                    "type": "string"
+                },
+                "zp_trans_id": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

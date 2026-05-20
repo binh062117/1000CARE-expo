@@ -1,0 +1,182 @@
+import { StyleSheet } from 'react-native'
+import { Fonts } from '~/assets/config'
+import Colors from '~/common/Colors/Colors'
+import { DIMENS } from '~/constants/index'
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex:1,
+    backgroundColor: Colors.backgroundColor,
+    justifyContent: 'space-between',
+  },
+  mainContainer: {
+    marginTop: 1,
+    flex: 1, 
+    paddingHorizontal: 18,
+    backgroundColor: Colors.white,
+  },
+  title: {
+    color: Colors.textColor2,
+    fontWeight: '700',
+    fontSize: 14,
+    lineHeight: 22,
+    fontFamily: Fonts.medium,
+    marginBottom: 12,
+  },
+  iconCheck: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
+  },
+  promotionInfoContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 18,
+    backgroundColor: Colors.white,
+  },
+  promotionName: {
+    marginTop: 18,
+    fontFamily: Fonts.bold,
+    fontWeight: '700',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  promotionEndDate: {
+    marginTop: 8,
+    fontFamily: Fonts.medium,
+    fontWeight: '500',
+    fontSize: 12,
+    lineHeight: 20,
+  },
+  promotionDescription: {
+    marginTop: 12,
+    fontFamily: Fonts.bold,
+    fontWeight: '500',
+    fontSize: 14,
+    lineHeight: 22,
+  },
+  sectionContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 18,
+    marginTop: 8,
+    backgroundColor: Colors.white,
+  },
+  productContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 9,
+    marginBottom: 9,
+    backgroundColor: '#FAFAFA',
+    borderRadius: 6,
+  },
+  levelContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 9,
+    marginBottom: 9,
+    backgroundColor: '#FAFAFA',
+    borderRadius: 6,
+  },
+  level:{
+    color: Colors.textColor2,
+    fontFamily: Fonts.medium,
+    fontSize: 14,
+    lineHeight: 22,
+    fontWeight: '500',
+  },
+  productImage: {
+    width: 74,
+    height: 62,
+  },
+  productName:{
+    color: Colors.textColor2,
+    fontFamily: Fonts.medium,
+    width: DIMENS.common.WINDOW_WIDTH - 150,
+    fontSize: 14,
+    lineHeight: 22,
+    fontWeight: '500',
+  },
+  productQuantity:{
+    color: Colors.textColor3,
+    fontFamily: Fonts.medium,
+    fontSize: 12,
+    lineHeight: 20,
+    marginTop: 2,
+    width: 176,
+    fontWeight: '500',
+  },
+  productInfo: {
+    marginLeft: 10,
+  },
+  priceContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginTop: 8,
+  },
+  priceTitle: {
+    color: Colors.textColor2,
+    fontWeight: '500',
+    fontSize: 14,
+    lineHeight: 18,
+    fontFamily: Fonts.medium,
+  },
+  price: {
+    color: Colors.systemColor2,
+    fontWeight: '700',
+    fontSize: 14,
+    lineHeight: 18,
+    fontFamily: Fonts.medium,
+    marginLeft: 6,
+  },
+  quantity: {
+    color: Colors.textColor3,
+    fontWeight: '500',
+    fontSize: 14,
+    lineHeight: 18,
+    fontFamily: Fonts.medium,
+    marginLeft: 6,
+  },
+  bottomContainer: {
+    paddingVertical: 18,
+    paddingTop: 20,
+    paddingBottom: 18,
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: Colors.white,
+    justifyContent: 'space-around',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    elevation: 16,
+  },
+  coverImage: {
+    width: DIMENS.common.WINDOW_WIDTH - 36,
+    height: 200,
+    borderRadius: 12,
+  },
+  btnAddContainer: {
+    margin: 0,
+    flexDirection: 'row',
+    paddingHorizontal: 0, 
+    marginBottom: 18,
+  },
+  btnAdd: {
+    borderRadius: 28,
+    backgroundColor: Colors.systemColor2,
+  },
+  styleButton: {
+    borderRadius: 50,
+    backgroundColor: Colors.systemColor2,
+  },
+  styleView: {
+    flex: 1,
+    paddingHorizontal: 20,
+    marginBottom: 5,
+  },
+})
+
+export default styles

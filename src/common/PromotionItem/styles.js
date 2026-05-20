@@ -1,0 +1,117 @@
+import { StyleSheet } from 'react-native'
+import { Fonts } from '~/assets/config'
+import Colors from '~/common/Colors/Colors'
+import { DIMENS } from '~/constants/index'
+
+export default StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    borderRadius: 6,
+    justifyContent: 'flex-start',
+    padding: 12,
+    marginHorizontal: 18,
+    marginBottom: 9,
+    backgroundColor: 'rgba(66, 118, 254, 0.1)',
+  },
+  icon: {
+    width: 18,
+    height: 18,
+  },
+  iconContainer: {
+    backgroundColor: Colors.systemColor2,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems:'center',
+    borderRadius: 42,
+    width: 42,
+    height: 42,
+  },
+  buyNow: {
+    color: Colors.systemColor2,
+    textAlign: 'left',
+    fontSize: 12,
+    lineHeight: 20,
+    fontWeight: '700',
+    marginLeft: 12,
+  },
+  promotion: {
+    color: Colors.textColor1,
+    fontFamily: Fonts.bold,
+    width: DIMENS.common.WINDOW_WIDTH - 120,
+    textAlign: 'left',
+    fontSize: 14,
+    lineHeight: 22,
+    fontWeight: '500',
+    marginLeft: 12,
+  },
+  promotionContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1, 
+    alignItems: 'center',
+  },
+  promotionInfoContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+  promotionType: {
+    color: Colors.systemColor2,
+    fontFamily: Fonts.medium,
+    marginTop: 4,
+    textAlign: 'left',
+    fontSize: 14,
+    lineHeight: 22,
+    fontWeight: '500',
+    marginLeft: 12,
+  },
+  promotionNote: {
+    color: Colors.textColor3,
+    fontFamily: Fonts.base,
+    width: DIMENS.common.WINDOW_WIDTH - 50 - 30 - 24,
+    marginTop: 6,
+    textAlign: 'left',
+    fontSize: 12,
+    lineHeight: 18,
+    fontWeight: '400',
+    fontStyle: 'italic',
+    marginLeft: 12,
+  },
+  column: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  productContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginLeft: 12,
+    marginTop: 12,
+  },
+  productImage: {
+    width: 74,
+    height: 62,
+  },
+  productName:{
+    color: Colors.textColor2,
+    fontFamily: Fonts.medium,
+    fontSize: 12,
+    lineHeight: 20,
+    width: DIMENS.common.WINDOW_WIDTH - 50 - 80 - 55,
+    fontWeight: '500',
+  },
+  productQuantity:{
+    color: Colors.textColor3,
+    fontFamily: Fonts.medium,
+    fontSize: 12,
+    lineHeight: 20,
+    marginTop: 2,
+    width: 176,
+    fontWeight: '500',
+  },
+  productInfo: {
+    marginLeft: 6,
+  },
+})

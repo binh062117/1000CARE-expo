@@ -1,0 +1,41 @@
+# NeomedApi.PresenterCreateProductRequest
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**addOn** | [**[PresenterAddOnProduct]**](PresenterAddOnProduct.md) |  | [optional] 
+**advertisementPriority** | **Number** |  | [optional] 
+**attributes** | **String** |  | [optional] 
+**baseProductId** | **Number** |  | [optional] 
+**description** | **String** |  | [optional] 
+**distributionUnit** | **String** |  | [optional] 
+**distributorId** | **Number** |  | [optional] 
+**dosageForms** | **String** |  | [optional] 
+**exclusiveType** | **Number** |  | [optional] 
+**expireDate** | **String** |  | [optional] 
+**hashtags** | **[String]** |  | [optional] 
+**images** | **[String]** |  | [optional] 
+**mainIngredient** | **String** |  | [optional] 
+**manufacture** | **String** |  | [optional] 
+**medicinalProps** | **String** |  | [optional] 
+**name** | **String** |  | [optional] 
+**origin** | **String** |  | [optional] 
+**packingSpecs** | **String** |  | [optional] 
+**paymentType** | **Number** |  | [optional] 
+**price** | **Number** |  | [optional] 
+**productCode** | **String** |  | [optional] 
+**productStatus** | **Number** |  | [optional] 
+**productType** | **Number** |  | [optional] 
+**receiptStatus** | **Boolean** |  | [optional] 
+**registeredCode** | **String** |  | [optional] 
+**reserve** | **Number** |  | [optional] 
+**salePrice** | **Number** |  | [optional] 
+**saleType** | **Number** |  | [optional] 
+**shortDescription** | **String** |  | [optional] 
+**thumbnail** | **String** |  | [optional] 
+**trademark** | **Number** |  | [optional] 
+**unit** | **String** |  | [optional] 
+**vatApplied** | **Boolean** |  | [optional] 
+**vatValue** | **Number** |  | [optional] 
+
+

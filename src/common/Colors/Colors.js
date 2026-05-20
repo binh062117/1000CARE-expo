@@ -1,0 +1,116 @@
+export default {
+  primary: '#1976D2',
+  red: '#e53935',
+  white: '#ffff',
+  gray: '#CFD8DC',
+  black: '#000000',
+  guide_dot: '#48654b',
+  black_less: '#191919',
+  input_register_text_color: '#A1A1A1',
+  gradient_red: ['#ED000C', '#D80011', '#C30014'],
+  gradient_header: ['#dcdcdc', '#fff', '#dcdcdc', '#fff'],
+  gradient_bg_active_header_btn: ['#CDCDCD', '#CDCDCD', '#CDCDCD'],
+  gradient_header_tab_inactive: ['#fff', '#fff', '#fff'],
+  gray_tint_eye: '#B5B5B5',
+  border_input_new_pass: '#ccc',
+  transparent: 'transparent',
+  // txt_hello: "#E20019",
+  bg_side_menu: '#fdfef9',
+  line_red: '#DD0000',
+  line_gray: '#CAD1C7',
+  bg_side_bar: '#fdfef9',
+  side_menu_wrapper: '#2a3541',
+  header_tab_active_viettel_pay: '#1184B5',
+  gradient_header_tab_viettel_pay: ['#00bca0', '#007edc'],
+  news_dot: 'rgba(0,0,0,1)',
+  border_input_update: '#ddd',
+  dim: 'rgba(0, 0, 0, 0.4)',
+  diamond_label: '#f8fb7a',
+  txt_desc: 'rgb(94, 94, 94)',
+  txt_head: 'rgb(82,81,80)',
+  history_bg: '#E4E5E7',
+  green: 'green',
+  separator_line: '#333',
+  container_pending_cancel: 'rgba(0, 0, 0, 0.5)',
+  icon_radio_language: 'rgba(0,0,0,0.8)',
+  bg_loading_container: 'rgba(0, 0, 0, 0.25)',
+  separated_or: 'rgb(137,148,113)',
+  separated_line: 'rgb(65,93,72)',
+  container_shop_list: 'rgba(0,0,0,0.5)',
+  view_more_desc: 'rgb(60,116,243)',
+  border_checkbox_cart: '#E8EAEB',
+  active_checkbox_cart: '#E30021',
+  text_checkbox_cart: '#44474A',
+  border_opt_detail: '#EAEAEA',
+  gradient_item_buy: ['#E0E1E6', '#F1F2F4', '#F2F4F5'],
+  btn_ok_vip_cart: '#000',
+  add_cart_more_opt: '#ECECEC',
+  opt_length_add_cart: '#F2F4F5',
+  shadow_wrapper_order: '#d3d3d3',
+  current_shop: '#ADAEAF',
+  btn_radio_default: '#2196f3',
+  bring_time_inner: '#FDFFFF',
+  input_table_container: '#E4E3E6',
+  product_container: '#E6E7EA',
+  history_complete: '#00CC00',
+  history_cancel: '#AA0000',
+  history_check: '#3300FF',
+  history_wait: '#1769ff',
+
+  //                       ........................ 1000CARE Brand Colors ........................
+  tealPrimary: '#0B7B8A',
+  tealDark: '#075E6B',
+  tealLight: '#E0F4F6',
+  goldAccent: '#F5A623',
+  textDark: '#1A1A2E',
+
+  colorMain: '#0B7B8A',
+  title: '#fff',//màu chữ Tài khoản trong Account
+  tabBarActiveTextColor: '#fff',//màu chữ tabTop
+  tabBarBackgroundColor: 'black',
+  tabBarUnderline: '#0B7B8A',//thanh kẻ dưới của tabTop
+  bg_container: '#fff',
+  input_login_text_color: 'rgb(137,143,113)',
+  btn_login: '#0B7B8A',//nút đăng nhập
+  text_btn_login: '#fff',
+  text_btn_login_other: '#fff',
+  btn_login_facebook: '#30377D',//màu button login face
+  btn_order_now: '#B20005',// màu button order now
+  gradient_header_tab_active: ['#fff', '#fff', '#fff'],//background logo đầu tiên trên cùng
+  tab_view: '#F1E1D2',
+  gradient_home: ['#F1E1D2', '#F1E1D2', '#F1E1D2', '#F1E1D2'],
+  btn_login_phone: '#737270',//màu button login phone
+  text_footer: '#062480',//màu chữ cuối trang login FFF700
+  header_tab_active: '#0B7B8A',//màu vạch kẻ trên cùng tab
+  txt_user_name: '#0B7B8A',// màu name use
+  gradient_error_btn: ['#0B7B8A', '#0B7B8A', '#0B7B8A'],//màu button Trải nghiệm ngay lần đầu đăng nhập
+  line_profile: '#0B7B8A',//màu boder ảnh profile,đường kẻ nhỏ ở dưới ảnh
+  priceDisplay: '#D88F33',//màu giá bán
+  prodprice: '#AFA69D',// màu giá cũ
+  btn_order: ['#0B7B8A', '#0B7B8A', '#0B7B8A'],//button order
+  btn_update_pass: '#0B7B8A',//background số lượng thông báo hôp thư
+  btn_language: '#fff', //color chữ ok language
+  bg_lang_modal: '#E6E6E6',//background cả modal thay đổi ngôn ngữ
+  txt_option_side_menu: '#383A3A',//màu chữ các mục trong drawer
+  txt_user_id: '#1E1F21',// màu chữ id và Point trong drawar
+  btn_gradient: ['#0B7B8A', '#0B7B8A', '#0B7B8A'],//color button bật GPS
+  gradient_select_shop: ['#BDD647', '#BDD647', '#BDD647'],//nút ok chọn shop
+  btn_option_side_menu_focus: '#EEEAEA',//background mục được chọn drawer
+  textName_Profile: '#470704',
+  textOther_Profile: '#000',//màu chữ id và Point trong thông tin account
+  button_language: '#0B7B8A',//background button Ok language
+  button_add: '#0B7B8A',
+  number_in_order: '#0B7B8A',
+  backgroundColor: '#F1F1F1',
+  
+  textColor1: '#262626',
+  textColor2: '#595959',
+  textColor3: '#8C8C8C',//màu chữ tabTop
+  textColor4: '#F5222D',
+  priceColor: '#F5222D',
+  systemColor2: '#4276FE',
+  successColor: '#4DDD8A',
+  redColor: '#DA0F00',
+  errorColor: '#FF6347',
+  borderColor: '#DFDFDF',
+}
