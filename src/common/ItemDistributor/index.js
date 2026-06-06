@@ -1,16 +1,12 @@
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import { Image } from '~/common/index'
-import {
-  logoNeoMed,
-} from '~/assets/constants'
-import { Fonts } from '~/assets/config'
+import { logoNeoMed } from '~/assets/constants'
 import { DIMENS } from '~/constants/index'
-import Colors from '~/common/Colors/Colors'
+import { s, fs } from '~/utils/responsive'
+
 const ItemDistributor = ({ data, onItemPress, selected }) => {
-  let imageSource = {
-    uri: data.logo || data.images,
-  }
+  let imageSource = { uri: data.logo || data.images }
   if (!imageSource.uri) {
     imageSource = logoNeoMed
   }
@@ -24,90 +20,115 @@ const ItemDistributor = ({ data, onItemPress, selected }) => {
           onItemPress()
         }
       }}
+      activeOpacity={0.8}
     >
-      <View style={styles.container}>
-        {
-          isPending && (
-            <View style={styles.overlay}>
-              <Text
-                style={styles.pending}
-              >
-                {'Coming soon'}
-              </Text>
-            </View>
-          )
-        }
-        <Image
-          style={styles.image}
-          source={imageSource}
-        />
-        <Text
-          style={styles.label}
-        >
+      <View style={[styles.container, selected && styles.containerSelected, isPending && styles.containerPending]}>
+        {isPending && (
+          <View style={styles.overlay}>
+            <Text style={styles.pending}>{'Sắp ra mắt'}</Text>
+          </View>
+        )}
+        <View style={styles.imageWrapper}>
+          <Image
+            style={styles.image}
+            source={imageSource}
+            resizeMode="contain"
+          />
+        </View>
+        <Text style={[styles.label, selected && styles.labelSelected]} numberOfLines={2}>
           {data.nick_name ? data.nick_name : data.name}
         </Text>
+        {selected && <View style={styles.activeIndicator} />}
       </View>
     </TouchableOpacity>
   )
 }
 
 const ItemWidth = (DIMENS.common.WINDOW_WIDTH - 5 * 6 - 12) / 3
+
 const styles = StyleSheet.create({
   container: {
     width: ItemWidth,
-    height: ItemWidth,
-    backgroundColor: 'white',
+    minHeight: ItemWidth * 0.9,
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 6,
-    borderColor: '#F5F5F5',
-    marginHorizontal: 5,
-    marginBottom: 5,
-  },
-  label: {
-    marginTop: 12,
-    fontFamily: Fonts.bold,
-    color: Colors.textColor2,
-    fontWeight: '700',
-    fontSize: 14,
-    lineHeight: 22,
-    textAlign: 'center',
-  },
-  image: {
-    width: ItemWidth - 24,
-    height: 66 - 24,
-    resizeMode: 'contain',
+    borderRadius: s(16),
+    marginHorizontal: s(5),
+    marginBottom: s(8),
+    paddingVertical: s(12),
+    paddingHorizontal: s(6),
+    borderWidth: 1.5,
+    borderColor: '#EDF2F7',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+    overflow: 'hidden',
   },
   containerSelected: {
-    borderWidth: 1,
-    borderRadius: 6,
-    borderColor: Colors.systemColor2,
+    borderColor: '#0B7B8A',
+    backgroundColor: '#F0FAFA',
+    shadowColor: '#0B7B8A',
+    shadowOpacity: 0.12,
+    shadowRadius: 10,
+    elevation: 4,
   },
-  check: {
-    width: 18,
-    height: 18,
-    margin: 12,
-    resizeMode: 'contain',
-    position: 'absolute',
-    right: '0%',
-    bottom: '0%',
-    top: '0%',
+  containerPending: {
+    opacity: 0.7,
   },
-  overlay: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(114, 114, 114, 0.5)',
-    position: 'absolute',
-    zIndex: 999,
-    display: 'flex',
-    flexDirection: 'column',
+  imageWrapper: {
+    width: s(52),
+    height: s(52),
+    borderRadius: s(12),
+    backgroundColor: '#F7FAFC',
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: s(8),
+  },
+  image: {
+    width: s(40),
+    height: s(40),
+    resizeMode: 'contain',
+  },
+  label: {
+    fontSize: fs(11),
+    color: '#4A5568',
+    fontWeight: '600',
+    textAlign: 'center',
+    lineHeight: s(16),
+    marginHorizontal: s(2),
+  },
+  labelSelected: {
+    color: '#0B7B8A',
+    fontWeight: '700',
+  },
+  activeIndicator: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: s(3),
+    backgroundColor: '#0B7B8A',
+    borderBottomLeftRadius: s(16),
+    borderBottomRightRadius: s(16),
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(11, 123, 138, 0.6)',
+    zIndex: 999,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: s(16),
   },
   pending: {
-    fontFamily: Fonts.bold,
-    color: Colors.white,
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: fs(10),
+    textAlign: 'center',
+    paddingHorizontal: s(4),
   },
 })
+
 export default React.memo(ItemDistributor)
