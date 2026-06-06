@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   textOrderCode: {
     fontSize: 14,
-    color: '#0095D9',
+    color: '#0B7B8A',
     
   },
   textNotification: {
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   button: {
     width: 90,
     height: 36,
-    backgroundColor: '#0095D9',
+    backgroundColor: '#0B7B8A',
     borderRadius: 18,
 
     display: 'flex',

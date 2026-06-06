@@ -16,7 +16,7 @@ const InputSearch = (props) => {
           <Icon
             type="feather"
             name={'search'}
-            color={'#0095D9'}
+            color={'#0B7B8A'}
             size={18}
           />
         </View>

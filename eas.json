@@ -1,21 +1,35 @@
 {
   "cli": {
     "version": ">= 18.10.0",
-    "appVersionSource": "remote"
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "development"
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "preview"
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "NPM_CONFIG_LEGACY_PEER_DEPS": "true"
+      },
+      "channel": "production"
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "binh062117@gmail.com",
+        "ascAppId": "6758020305",
+        "ascApiKeyPath": "/Users/huynhquocbinh/Downloads/AuthKey_9YYU5D2638.p8.txt",
+        "ascApiKeyIssuerId": "eebf5454-e6b8-4304-a0c2-7d7cd788a583",
+        "ascApiKeyId": "9YYU5D2638"
+      }
+    }
   }
 }

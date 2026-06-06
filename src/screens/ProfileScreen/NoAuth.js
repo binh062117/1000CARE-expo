@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     width: 122,
     height: 42,
     borderRadius: 21,
-    backgroundColor: '#0095D9',
+    backgroundColor: '#0B7B8A',
 
     display: 'flex',
     justifyContent: 'center',
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     borderRadius: 21,
     backgroundColor: '#FFF',
 
-    borderColor: '#0095D9',
+    borderColor: '#0B7B8A',
     borderWidth: 1,
     borderStyle: 'solid',
 
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textSignUp: {
-    color: '#0095D9',
+    color: '#0B7B8A',
     fontSize: 14,
     fontWeight: '600',
   },

@@ -2,7 +2,7 @@
   "expo": {
     "name": "1000CARE",
     "slug": "1000care",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -16,14 +16,23 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.1000care.app"
+      "bundleIdentifier": "com.m1000.healthcare",
+      "buildNumber": "10",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "1000CARE cần truy cập thư viện ảnh của bạn để chọn ảnh đại diện và gửi hình ảnh đính kèm.",
+        "NSCameraUsageDescription": "1000CARE cần truy cập camera để chụp ảnh trực tiếp làm ảnh đại diện hoặc gửi đính kèm.",
+        "NSPhotoLibraryAddUsageDescription": "1000CARE cần quyền lưu ảnh vào thư viện để bạn có thể lưu các tài liệu hoặc hình ảnh từ ứng dụng.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "runtimeVersion": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.1000care.app"
+      "package": "com.m1000.healthcare",
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,6 +41,9 @@
       "eas": {
         "projectId": "d9111e9a-0fdb-479a-b481-3b7bfdafdf52"
       }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/d9111e9a-0fdb-479a-b481-3b7bfdafdf52"
     }
   }
 }

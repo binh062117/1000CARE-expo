@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native'
+import { s, fs } from '../../utils/responsive'
 
 const BottomButon = ({ label, onPress }) => {
   return (
@@ -23,31 +24,32 @@ const BottomButon = ({ label, onPress }) => {
 const styles = StyleSheet.create({
   wrap: {
     width: '100%',
-    height: 68,
+    height: s(68),
     backgroundColor: '#FFF',
 
-    paddingHorizontal: 18,
-    paddingVertical: 18,
+    paddingHorizontal: s(18),
+    paddingVertical: s(9),
 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   button: {
-    width: Dimensions.get('window').width - 36,
-    height: 50,
-    backgroundColor: '#0095D9',
+    width: Dimensions.get('window').width - s(36),
+    height: s(50),
+    backgroundColor: '#0B7B8A',
 
     maxWidth: 320,
-    borderRadius: 25,
+    borderRadius: s(25),
 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    fontSize: 14,
+    fontSize: fs(14),
     color: '#FFF',
+    fontWeight: 'bold',
   },
 })
 

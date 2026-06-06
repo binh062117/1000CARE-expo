@@ -19,7 +19,7 @@
     <key>CFBundlePackageType</key>
     <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0.0</string>
+    <string>1.0.1</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleURLTypes</key>
@@ -27,12 +27,12 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.1000care.app</string>
+          <string>com.m1000.healthcare</string>
         </array>
       </dict>
     </array>
     <key>CFBundleVersion</key>
-    <string>1</string>
+    <string>10</string>
     <key>LSMinimumSystemVersion</key>
     <string>12.0</string>
     <key>LSRequiresIPhoneOS</key>
@@ -71,6 +71,14 @@
     <key>UIUserInterfaceStyle</key>
     <string>Light</string>
     <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>1000CARE cần truy cập thư viện ảnh của bạn để chọn ảnh đại diện và gửi hình ảnh đính kèm.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>1000CARE cần truy cập camera để chụp ảnh trực tiếp làm ảnh đại diện hoặc gửi đính kèm.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>1000CARE cần quyền lưu ảnh vào thư viện để bạn có thể lưu các tài liệu hoặc hình ảnh từ ứng dụng.</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
   </dict>
 </plist>

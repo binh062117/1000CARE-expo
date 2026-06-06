@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Text } from '~/common';
+import { s, fs } from '../utils/responsive';
 
 const { width } = Dimensions.get('window');
 
@@ -44,38 +45,38 @@ const PremiumCard = ({
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginVertical: 12,
+    marginVertical: s(12),
     shadowColor: '#0B7B8A', // Teal Primary
-    shadowOffset: { width: 0, height: 10 },
+    shadowOffset: { width: 0, height: s(10) },
     shadowOpacity: 0.2,
-    shadowRadius: 15,
+    shadowRadius: s(15),
     elevation: 8,
   },
   card: {
-    width: width - 32,
-    height: 160,
-    borderRadius: 24,
-    padding: 24,
+    width: width - s(32),
+    height: s(160),
+    borderRadius: s(24),
+    padding: s(24),
     alignSelf: 'center',
     overflow: 'hidden',
     position: 'relative',
   },
   glassEffect: {
     position: 'absolute',
-    top: -50,
-    right: -50,
-    width: 150,
-    height: 150,
-    borderRadius: 75,
+    top: -s(50),
+    right: -s(50),
+    width: s(150),
+    height: s(150),
+    borderRadius: s(75),
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
   circleDecorator: {
     position: 'absolute',
-    bottom: -30,
-    left: -30,
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    bottom: -s(30),
+    left: -s(30),
+    width: s(100),
+    height: s(100),
+    borderRadius: s(50),
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
   },
   content: {
@@ -88,34 +89,34 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#FFFFFF',
-    fontSize: 22,
+    fontSize: fs(22),
     fontWeight: '800',
-    lineHeight: 28,
+    lineHeight: s(28),
   },
   subtitle: {
     color: 'rgba(255, 255, 255, 0.9)',
-    fontSize: 14,
-    marginTop: 6,
+    fontSize: fs(14),
+    marginTop: s(6),
     fontWeight: '500',
   },
   actionButton: {
     backgroundColor: '#FFFFFF',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 15,
+    paddingVertical: s(10),
+    paddingHorizontal: s(20),
+    borderRadius: s(15),
     alignSelf: 'flex-start',
   },
   actionText: {
     color: '#0B7B8A', // Teal Primary
-    fontSize: 13,
+    fontSize: fs(13),
     fontWeight: '700',
   },
   cardImage: {
     position: 'absolute',
-    right: -10,
-    bottom: -10,
-    width: 140,
-    height: 140,
+    right: -s(10),
+    bottom: -s(10),
+    width: s(140),
+    height: s(140),
     zIndex: 1,
     opacity: 0.8,
   },

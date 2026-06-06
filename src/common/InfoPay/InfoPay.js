@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   textPay: {
-    color: '#0095D9',
+    color: '#0B7B8A',
     fontSize: 14,
   },
   textCode: {

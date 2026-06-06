@@ -6,7 +6,7 @@ import { Image } from '~/common/index'
 const DistributorItem = ({ data, selected, changeDistrinutor }) => {
   return (
     <TouchableOpacity
-      style={[styles.wrapper, { borderColor: selected ? '#0095D9' : '#FFF' }]}
+      style={[styles.wrapper, { borderColor: selected ? '#0B7B8A' : '#FFF' }]}
       onPress={() => changeDistrinutor(data.id)}
     >
       <Image

@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#0095D9',
+    borderColor: '#0B7B8A',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: LAYOUTPADDING,
     paddingVertical: 4,
     fontSize: 12,
-    color: '#0095D9',
+    color: '#0B7B8A',
   },
   listProductsContainer: {
     marginTop: 20,

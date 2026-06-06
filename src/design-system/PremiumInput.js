@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { s, fs } from '../utils/responsive';
 
 const PremiumInput = ({ label, value, onChangeText, placeholder, keyboardType = 'default', error }) => {
   return (
@@ -22,32 +23,32 @@ const PremiumInput = ({ label, value, onChangeText, placeholder, keyboardType = 
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
+    marginVertical: s(10),
     width: '100%',
   },
   label: {
-    fontSize: 14,
+    fontSize: fs(14),
     color: '#354052',
-    marginBottom: 8,
+    marginBottom: s(8),
     fontWeight: '500',
-    marginLeft: 4,
+    marginLeft: s(4),
   },
   inputContainer: {
     backgroundColor: '#fff',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    height: 56,
+    borderRadius: s(16),
+    paddingHorizontal: s(16),
+    height: s(56),
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: '#e0e0e0',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: s(2) },
     shadowOpacity: 0.05,
-    shadowRadius: 4,
+    shadowRadius: s(4),
     elevation: 2,
   },
   input: {
-    fontSize: 16,
+    fontSize: fs(16),
     color: '#354052',
   },
   errorInput: {
@@ -55,9 +56,9 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: '#ff190c',
-    fontSize: 12,
-    marginTop: 4,
-    marginLeft: 4,
+    fontSize: fs(12),
+    marginTop: s(4),
+    marginLeft: s(4),
   },
 });
 

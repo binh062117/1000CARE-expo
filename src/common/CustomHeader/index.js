@@ -21,7 +21,7 @@ const CustomHeader = ({ navigation, search = true, title }) => {
                 <Icon
                   type="antdesign"
                   name={'search'}
-                  color={'#0095D9'}
+                  color={'#0B7B8A'}
                   size={18}
                 />
                 <Text style={styles.searchPlaceholder}>Nhập tên sản phẩm, nhà thuốc...</Text>

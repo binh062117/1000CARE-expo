@@ -10,7 +10,7 @@ const TitleDetailOrderBox = ({ urlIcon, title, route, navigation, params }) => {
           <Image
             style={styles.icon}
             source={urlIcon}
-            tintColor="#0095D9"
+            tintColor="#0B7B8A"
           />
         </View>
         <Text style={styles.title}>{title}</Text>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     height: 24,
 
     borderRadius: 12,
-    borderColor: '#0095D9',
+    borderColor: '#0B7B8A',
     borderStyle: 'solid',
     borderWidth: 1,
 
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   textViewDetailButton: {
     fontSize: 12,
-    color: '#0095D9',
+    color: '#0B7B8A',
     lineHeight: 16,
   },
 })

@@ -113,7 +113,7 @@ const LoginPhone = ({ navigation }) => {
               backgroundColor: '#FFFFFF',
               borderRadius: 30,
               padding: 10,
-              shadowColor: '#0095D9',
+              shadowColor: '#0B7B8A',
               shadowOffset: { width: 0, height: 10 },
               shadowOpacity: 0.1,
               shadowRadius: 20,
@@ -123,7 +123,7 @@ const LoginPhone = ({ navigation }) => {
             }}>
               <Image source={logoNeoMed} resizeMode="contain" style={{ width: 90, height: 90 }} />
             </View>
-            <Text style={{ fontSize: 32, fontWeight: '900', color: '#0095D9', marginTop: 15, letterSpacing: 1 }}>1000CARE</Text>
+            <Text style={{ fontSize: 32, fontWeight: '900', color: '#0B7B8A', marginTop: 15, letterSpacing: 1 }}>1000CARE</Text>
             <Text style={{ fontSize: 14, color: '#6d787e', fontWeight: '500', marginTop: 5 }}>Chăm sóc sức khỏe tận tâm</Text>
           </Animated.View>
 
@@ -154,7 +154,7 @@ const LoginPhone = ({ navigation }) => {
               <Text style={{ color: '#718096', fontSize: 14 }}>
                 Bạn chưa có tài khoản? {' '}
                 <Text 
-                  style={{ color: '#0095D9', fontWeight: 'bold' }}
+                  style={{ color: '#0B7B8A', fontWeight: 'bold' }}
                   onPress={() => navigation.navigate('RegisterScreen')}
                 >
                   Đăng ký ngay
@@ -176,14 +176,14 @@ const LoginPhone = ({ navigation }) => {
               onPress={() => Linking.openURL('tel:0966492818')}
               style={{ paddingHorizontal: 10 }}
             >
-              <Text style={{ color: '#0095D9', fontWeight: '700', fontSize: 15 }}>096 649 2818</Text>
+              <Text style={{ color: '#0B7B8A', fontWeight: '700', fontSize: 15 }}>096 649 2818</Text>
             </TouchableOpacity>
             <Text style={{ color: '#CBD5E0' }}>|</Text>
             <TouchableOpacity 
               onPress={() => Linking.openURL('tel:0358525558')}
               style={{ paddingHorizontal: 10 }}
             >
-              <Text style={{ color: '#0095D9', fontWeight: '700', fontSize: 15 }}>035 852 5558</Text>
+              <Text style={{ color: '#0B7B8A', fontWeight: '700', fontSize: 15 }}>035 852 5558</Text>
             </TouchableOpacity>
           </View>
         </View>

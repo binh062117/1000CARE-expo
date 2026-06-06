@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   hour: {
     fontSize: 14,
-    color: '#0095D9',
+    color: '#0B7B8A',
   },
   wrapInfo: {
     width: Dimensions.get('window').width - 78,

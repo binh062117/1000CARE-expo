@@ -7,7 +7,7 @@ const RadioButton = ({ selected, title, onClick }) => {
       onPress={onClick}
       style={styles.wrap}
     >
-      <View style={[styles.radio, { borderColor: selected ? '#0095D9' : '#CCC' }]}>
+      <View style={[styles.radio, { borderColor: selected ? '#0B7B8A' : '#CCC' }]}>
         {
           selected ? <View style={styles.dot} /> : <></>
         }
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#0095D9',
+    backgroundColor: '#0B7B8A',
   },
   text: {
     marginLeft: 6,
