@@ -14,6 +14,7 @@ import { getListAdsBannerNeomed } from '~/store/selector'
 import { requestGetListAdsBannerHomeNeomedByDistributor } from '~/store/actions'
 import SliderBox from '~/common/SliderBox/index'
 import Colors from '~/common/Colors/Colors'
+import PremiumCard from '~/design-system/PremiumCard'
 
 const ListDistributor = ({ navigation, onItemPress, selectedDistri, onFavorClick, onAddProduct, onMessage }) => {
   const dispatch = useDispatch()
@@ -52,6 +53,13 @@ const ListDistributor = ({ navigation, onItemPress, selectedDistri, onFavorClick
           openImage={() => {}}
           onCurrentItemPressed={() => { }}
           ImageComponentStyle={styles.swiperItem}
+        />
+      </View>
+      <View style={{ paddingHorizontal: 16, marginVertical: 10 }}>
+        <PremiumCard 
+          title="Chăm sóc sức khỏe 1000CARE" 
+          subtitle="Hệ thống phân phối dược phẩm chính hãng. Đặt hàng nhanh chóng, hỗ trợ 24/7."
+          onPress={() => console.log('Premium Card Pressed')}
         />
       </View>
       <ProductPriceSock
