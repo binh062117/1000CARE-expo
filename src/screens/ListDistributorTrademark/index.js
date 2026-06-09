@@ -3,11 +3,13 @@ import { SafeAreaView, FlatList, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '~/common/Header/index'
 import { getDistributorsActive, requestGetTrademarksAdvertisement } from '~/store/actions'
-import Colors from '~/common/Colors/Colors'
 import { back } from '~/assets/constants'
-import { LoadingView } from '~/common'
+import { LoadingView, Text } from '~/common'
 import ItemDistributor from '~/common/ItemDistributor/index'
 import { getListDistributors, getListTrademarksAdvertisement } from '~/store/selector'
+import EmptyItem from '~/common/EmptyItem/index'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const ListDistributorTrademark = ({ navigation, route }) => {
   // const [currentPage, setCurrentPage] = useState(1)
@@ -54,7 +56,7 @@ const ListDistributorTrademark = ({ navigation, route }) => {
   }, [listDistributors, listTrademarksAdvertisement])
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.safeArea}>
       <Header
         leftAction={()=> navigation.pop()}
         iconLeft={back}
@@ -62,10 +64,19 @@ const ListDistributorTrademark = ({ navigation, route }) => {
         navigation={navigation}
         cart={false}
       />
+      <View style={styles.hero}>
+        <Text style={styles.heroEyebrow}>{type === 'distributor' ? 'SUPPLIER DIRECTORY' : 'BRAND DIRECTORY'}</Text>
+        <Text style={styles.heroTitle}>{title}</Text>
+        <Text style={styles.heroSubtitle}>
+          {type === 'distributor'
+            ? 'Chọn nhà cung cấp để xem danh mục sản phẩm phù hợp với nhà thuốc.'
+            : 'Chọn thương hiệu để lọc nhanh các sản phẩm đang phân phối.'}
+        </Text>
+      </View>
       <View
         style={styles.wrap}
       >
-        {listDistributors ? 
+        {getData() ? 
           <FlatList
             style={styles.listDistributors}
             contentContainerStyle={styles.distributors}
@@ -88,6 +99,9 @@ const ListDistributorTrademark = ({ navigation, route }) => {
               )
             }}
             keyExtractor={(_, idx) => idx.toString()}
+            ListEmptyComponent={() => (
+              <EmptyItem text={type === 'distributor' ? 'Chưa có nhà cung cấp' : 'Chưa có thương hiệu'} />
+            )}
           /> : null }
       </View>
       {isLoading && <LoadingView />}
@@ -97,16 +111,50 @@ const ListDistributorTrademark = ({ navigation, route }) => {
 export default ListDistributorTrademark
 
 const styles = StyleSheet.create({
-  listProductsContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginHorizontal: 9,
+  safeArea: {
+    flex: 1,
+    backgroundColor: brandColors.background,
+  },
+  hero: {
+    marginHorizontal: s(16),
+    marginTop: s(14),
+    borderRadius: s(28),
+    padding: s(20),
+    backgroundColor: brandColors.tealDark,
+    ...brandShadow.teal,
+  },
+  heroEyebrow: {
+    fontSize: fs(10),
+    lineHeight: fs(14),
+    fontWeight: '900',
+    letterSpacing: 1.6,
+    color: brandColors.goldAccent,
+  },
+  heroTitle: {
+    marginTop: s(6),
+    fontSize: fs(25),
+    lineHeight: fs(31),
+    fontWeight: '900',
+    color: brandColors.surface,
+  },
+  heroSubtitle: {
+    marginTop: s(8),
+    fontSize: fs(13),
+    lineHeight: fs(20),
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.7)',
   },
   wrap: {
-    display: 'flex',
     flex: 1,
-    justifyContent: 'center',
-    marginTop: 6,
-    backgroundColor: Colors.backgroundColor,
+    marginTop: s(12),
+    backgroundColor: brandColors.background,
+  },
+  listDistributors: {
+    flex: 1,
+  },
+  distributors: {
+    paddingHorizontal: s(14),
+    paddingBottom: s(36),
+    alignItems: 'center',
   },
 })

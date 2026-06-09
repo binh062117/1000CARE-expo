@@ -1,31 +1,122 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
-import { View, SafeAreaView, FlatList, Image, Linking, TouchableOpacity } from 'react-native';
+import { View, FlatList, Image, Linking, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from 'react-native-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import CustomHeader from '../../common/CustomHeader/index';
 
 import {
-  resetStatusAddCart, getDistributorsActive, requestGetTrademarksAdvertisement, requestGetProductBestSeller, requestGetProductsHotDeal,
+  resetStatusAddCart, getDistributorsActive, requestGetTrademarksAdvertisement, requestGetProductBestSeller, requestGetProductsHotDeal, getInfo,
   requestGetListAdsBannerHomeNeomedByDistributor, loadNccFavorite, setSelectedDistri, requestGetProductPriceSock, openAppTheFirst, getCheckOnlinePharmacy, requestGetPharmacyInfo,
 } from '~/store/actions';
 import { getAuthStore, getAddItemStatus, getSelectedDistri, getPharmacyInfo, getIsLoadNccFavorite, getVersionNew, getForceUpdate, getUpdate, getOpenAppTheFirst } from '~/store/selector';
+import { getListItem } from '~/store/cart/cartSelectors';
 import ItemDistributorTab from '~/common/ItemDistributorTab';
 import ListDistributor from './ListDistributor';
 import styles from './styles';
 import DistributorData from './DistributorData/index';
-import { NAVIGATION_BANK_ACCOUNT } from '~/navigation/routes';
+import { NAVIGATION_BANK_ACCOUNT, NAVIGATION_TO_CART_SCREEN, NAVIGATION_TO_SEARCH } from '~/navigation/routes';
 import strings from '~/i18n';
 import Status from '~/common/Status/Status';
 import ListAllProduct from './ListAllProduct/ListAllProduct';
 import ErrorView from '~/common/ErrorView/index';
 import { check_info } from '~/assets/constants';
-import { Button, Text } from '~/common/index';
+import { Icon, Text } from '~/common/index';
 import { Platform } from 'react-native';
 import { asyncStorage } from '~/store/index';
 import packageJson from '../../../package.json';
 import PremiumCard from '~/design-system/PremiumCard';
 import PremiumButton from '~/design-system/PremiumButton';
+import { brandColors } from '~/design-system/tokens';
+import { showToast } from '~/utils/toast';
 // import { NetworkContext } from '../../network/NetworkProvider'
+
+const appLogo = require('../../../assets/icon.png');
+
+const HomeCartButton = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const listItem = useSelector(state => getListItem(state));
+  const { isLoggedIn } = useSelector(state => getAuthStore(state));
+
+  useEffect(() => {
+    if (listItem === null && isLoggedIn) {
+      dispatch(getInfo());
+    }
+  }, [dispatch, listItem, isLoggedIn]);
+
+  const count = (listItem?.items || []).reduce((total, distributor) => {
+    return total + (distributor?.items || []).reduce((sum, group) => {
+      return sum + (group?.items?.length || 0);
+    }, 0);
+  }, 0);
+
+  const onPress = () => {
+    if (!isLoggedIn) {
+      showToast(strings.common.requireLogin);
+      return;
+    }
+    navigation.navigate(NAVIGATION_TO_CART_SCREEN);
+  };
+
+  return (
+    <TouchableOpacity activeOpacity={0.84} style={styles.cartPill} onPress={onPress}>
+      <Icon type="feather" name="shopping-cart" color={brandColors.surface} size={24} />
+      <View style={styles.cartBadge}>
+        <Text style={styles.cartBadgeText}>{count}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+const MarketplaceHeader = ({ navigation, selectedDistri }) => {
+  const isSupplierMode = selectedDistri?.id !== -1;
+  const supplierName = selectedDistri?.name || '1000CARE';
+
+  return (
+    <View style={styles.marketHeader}>
+      <View style={styles.marketHeaderTop}>
+        <View style={styles.brandMark}>
+          <Image source={appLogo} style={styles.brandLogo} resizeMode="cover" />
+        </View>
+        <View style={styles.brandCopy}>
+          <Text style={styles.headerEyebrow}>1000CARE MARKET</Text>
+          <Text style={styles.headerTitle} numberOfLines={1}>{isSupplierMode ? supplierName : 'Sức khỏe trong tầm tay'}</Text>
+        </View>
+        <HomeCartButton navigation={navigation} />
+      </View>
+
+      <TouchableOpacity
+        activeOpacity={0.86}
+        style={styles.searchDock}
+        onPress={() => navigation.navigate(NAVIGATION_TO_SEARCH)}
+      >
+        <View style={styles.searchIconBubble}>
+          <Icon type="feather" name="search" color={brandColors.surface} size={18} />
+        </View>
+        <View style={styles.searchTextWrap}>
+          <Text style={styles.searchLabel}>Tìm nhanh</Text>
+          <Text style={styles.searchText}>Sản phẩm, thương hiệu, nhà thuốc</Text>
+        </View>
+      </TouchableOpacity>
+
+      <View style={styles.headerMetrics}>
+        <View style={styles.metricItem}>
+          <Text style={styles.metricValue}>24/7</Text>
+          <Text style={styles.metricLabel}>Hỗ trợ</Text>
+        </View>
+        <View style={styles.metricDivider} />
+        <View style={styles.metricItem}>
+          <Text style={styles.metricValue}>1000+</Text>
+          <Text style={styles.metricLabel}>Sản phẩm</Text>
+        </View>
+        <View style={styles.metricDivider} />
+        <View style={styles.metricItem}>
+          <Text style={styles.metricValue}>GMP</Text>
+          <Text style={styles.metricLabel}>Chuẩn chọn</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
 
 const HomeScreen = ({ navigation }) => {
   // const { isConnected } = useContext(NetworkContext)
@@ -186,11 +277,9 @@ const HomeScreen = ({ navigation }) => {
   // }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: brandColors.tealDark }}>
       <View style={styles.container}>
-        <CustomHeader
-          navigation={navigation}
-        />
+        <MarketplaceHeader navigation={navigation} selectedDistri={selectedDistri} />
         <View style={{ flex: 1 }}>
           {
             selectedDistri?.id !== -1 && (
@@ -339,7 +428,7 @@ const HomeScreen = ({ navigation }) => {
                 }}
                 style={{ marginTop: 10, alignItems: 'center' }}
               >
-                <Text style={{ color: '#6d787e' }}>Để sau</Text>
+                <Text style={{ color: brandColors.muted }}>Để sau</Text>
               </TouchableOpacity>
             </View>
           }

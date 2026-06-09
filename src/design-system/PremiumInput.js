@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 import { s, fs } from '../utils/responsive';
+import { brandColors, brandShadow } from './tokens';
 
 const PremiumInput = ({ label, value, onChangeText, placeholder, keyboardType = 'default', error }) => {
   return (
@@ -12,7 +13,7 @@ const PremiumInput = ({ label, value, onChangeText, placeholder, keyboardType = 
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor="#979da0"
+          placeholderTextColor={brandColors.mutedLight}
           keyboardType={keyboardType}
         />
       </View>
@@ -28,34 +29,31 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: fs(14),
-    color: '#354052',
+    color: brandColors.textDark,
     marginBottom: s(8),
-    fontWeight: '500',
+    fontWeight: '700',
     marginLeft: s(4),
   },
   inputContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: brandColors.surface,
     borderRadius: s(16),
     paddingHorizontal: s(16),
     height: s(56),
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#e0e0e0',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: s(2) },
-    shadowOpacity: 0.05,
-    shadowRadius: s(4),
-    elevation: 2,
+    borderColor: brandColors.border,
+    ...brandShadow.soft,
   },
   input: {
     fontSize: fs(16),
-    color: '#354052',
+    color: brandColors.textDark,
+    fontWeight: '500',
   },
   errorInput: {
-    borderColor: '#ff190c',
+    borderColor: brandColors.danger,
   },
   errorText: {
-    color: '#ff190c',
+    color: brandColors.danger,
     fontSize: fs(12),
     marginTop: s(4),
     marginLeft: s(4),

@@ -8,6 +8,8 @@ import {
   NAVIGATION_TO_HOT_DEAL_SCREEN,
   NAVIGATION_TO_PROFILE_SCREEN,
 } from '~/navigation/routes';
+import { s, fs } from '~/utils/responsive';
+import { brandColors, brandShadow } from '~/design-system/tokens';
 
 // Enable LayoutAnimation on Android
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
@@ -63,16 +65,14 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
               <View style={[styles.iconContainer, isFocused && styles.activeIconContainer]}>
                 <Image
                   source={icons[route.name]}
-                  style={[
+                style={[
                     styles.icon,
-                    { tintColor: isFocused ? '#FFFFFF' : '#8C8C8C' }
+                    { tintColor: isFocused ? brandColors.surface : brandColors.mutedLight }
                   ]}
                   resizeMode="contain"
                 />
               </View>
-              {isFocused && (
-                <Text style={styles.labelText}>{label}</Text>
-              )}
+              <Text style={[styles.labelText, isFocused && styles.activeLabelText]}>{label}</Text>
             </TouchableOpacity>
           );
         })}
@@ -86,50 +86,55 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: width,
-    paddingHorizontal: 16,
-    paddingBottom: Platform.OS === 'ios' ? 24 : 16,
+    paddingHorizontal: s(16),
+    paddingBottom: Platform.OS === 'ios' ? s(24) : s(16),
     backgroundColor: 'transparent',
   },
   tabBar: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 35,
-    height: 75,
+    backgroundColor: brandColors.textDark,
+    borderRadius: s(28),
+    minHeight: s(78),
     alignItems: 'center',
-    justifyContent: 'space-around',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.1,
-    shadowRadius: 20,
-    elevation: 10,
-    paddingHorizontal: 8,
+    justifyContent: 'space-between',
+    ...brandShadow.soft,
+    paddingHorizontal: s(10),
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   tabItem: {
-    flexDirection: 'row',
+    flex: 1,
     alignItems: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 25,
+    justifyContent: 'center',
+    paddingVertical: s(8),
+    borderRadius: s(20),
   },
   activeTabItem: {
-    backgroundColor: '#E0F4F6', // Teal Light
+    backgroundColor: brandColors.surface,
   },
   iconContainer: {
-    padding: 8,
-    borderRadius: 20,
+    width: s(34),
+    height: s(34),
+    borderRadius: s(14),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   activeIconContainer: {
-    backgroundColor: '#0B7B8A', // Teal Primary
+    backgroundColor: brandColors.tealPrimary,
   },
   icon: {
-    width: 22,
-    height: 22,
+    width: s(22),
+    height: s(22),
   },
   labelText: {
-    marginLeft: 6,
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#0B7B8A', // Teal Primary
+    marginTop: s(4),
+    fontSize: fs(10),
+    lineHeight: fs(13),
+    fontWeight: '800',
+    color: 'rgba(255,255,255,0.52)',
+  },
+  activeLabelText: {
+    color: brandColors.tealPrimary,
   }
 });
 

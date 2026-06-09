@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View, TextInput, Text, Platform } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Text } from 'react-native'
 import CartHeaderButton from '~/common/CartHeaderButton/CartHeaderButton'
 import { Icon } from '~/common'
 import { NAVIGATION_TO_SEARCH } from '~/navigation/routes'
-import Colors from '../Colors/Colors'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const CustomHeader = ({ navigation, search = true, title }) => {
 
@@ -21,8 +22,8 @@ const CustomHeader = ({ navigation, search = true, title }) => {
                 <Icon
                   type="antdesign"
                   name={'search'}
-                  color={'#0B7B8A'}
-                  size={18}
+                  color={brandColors.tealPrimary}
+                  size={s(18)}
                 />
                 <Text style={styles.searchPlaceholder}>Nhập tên sản phẩm, nhà thuốc...</Text>
               </View>
@@ -51,55 +52,45 @@ export default CustomHeader
 
 const styles = StyleSheet.create({
   outerContainer: {
-    backgroundColor: '#FFFFFF',
-    paddingBottom: 10,
+    backgroundColor: brandColors.surface,
+    paddingBottom: s(10),
   },
   container: {
     width: '100%',
-    height: 64,
-    paddingHorizontal: 16,
+    height: s(68),
+    paddingHorizontal: s(16),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: brandColors.surface,
   },
   searchContainer: {
     flex: 1,
-    height: 46,
-    backgroundColor: '#F7FAFC',
-    borderRadius: 23,
-    marginRight: 12,
+    height: s(48),
+    backgroundColor: brandColors.background,
+    borderRadius: s(16),
+    marginRight: s(12),
     borderWidth: 1,
-    borderColor: '#EDF2F7',
+    borderColor: brandColors.borderSoft,
     justifyContent: 'center',
-    paddingHorizontal: 16,
-    ...Platform.select({
-      ios: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.03,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
+    paddingHorizontal: s(16),
+    ...brandShadow.soft,
   },
   searchInner: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   searchPlaceholder: {
-    marginLeft: 10,
-    fontSize: 14,
-    color: '#A0AEC0',
+    marginLeft: s(10),
+    fontSize: fs(14),
+    color: brandColors.mutedLight,
     fontWeight: '500',
   },
   cartContainer: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: '#F7FAFC',
+    width: s(48),
+    height: s(48),
+    borderRadius: s(16),
+    backgroundColor: brandColors.tealLight,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -109,8 +100,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: '800',
-    fontSize: 20,
-    color: '#1A202C',
-    letterSpacing: -0.5,
+    fontSize: fs(20),
+    color: brandColors.textDark,
+    letterSpacing: 0,
   },
 })

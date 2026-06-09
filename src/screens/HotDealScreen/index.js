@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 
 import HotDealItem from './HotDealItem'
-import CustomHeader from '~/common/CustomHeader/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { getListBanner, getBannerStatus, getAuthStore, getErrorGetAllListBanner, getListDistributorsHotDeal } from '~/store/selector'
 import { resetBanners, getBanners, getDistributorsActive } from '~/store/actions'
@@ -21,6 +20,8 @@ import ErrorView from '~/common/ErrorView/index'
 import Colors from '~/common/Colors/Colors'
 import ItemDistributorTab from '~/common/ItemDistributorTab'
 import { check_info } from '~/assets/constants'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const screenHeight = Dimensions.get('window').height
 const headerHeight = 58
@@ -143,12 +144,12 @@ const HotDealScreen = ({ navigation, route }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <CustomHeader
-        navigation={navigation}
-        title={'Hot deal'}
-        search={false}
-      />
+    <SafeAreaView style={{ flex: 1, backgroundColor: brandColors.background }}>
+      <View style={styles.dealHero}>
+        <Text style={styles.heroEyebrow}>PROMOTION HUB</Text>
+        <Text style={styles.heroTitle}>Ưu đãi nhà thuốc</Text>
+        <Text style={styles.heroSubtitle}>Chọn nhà phân phối để xem combo, voucher và chương trình nạp tiền đang mở.</Text>
+      </View>
       <FlatList
         style={styles.listDistributors}
         contentContainerStyle={styles.distributors}
@@ -174,10 +175,9 @@ const HotDealScreen = ({ navigation, route }) => {
           ListFooterComponent={() => {
             return (
               <>
-                <Text style={styles.titleHotDeal}>Khuyến mãi</Text>
+                <Text style={styles.titleHotDeal}>Chiến dịch hiện có</Text>
                 <Text style={styles.subTitleHotDeal}>
-                  Vui lòng kiểm tra thông tin khuyến mãi, đối tượng khuyến mãi trước khi
-                  sử dụng
+                  Vui lòng kiểm tra điều kiện áp dụng trước khi sử dụng ưu đãi.
                 </Text>
               </>
             )
@@ -229,35 +229,68 @@ const styles = StyleSheet.create({
     width: '100%',
     height:
       screenHeight - headerHeight - distributorHeight - bottomTabHeight - 26,
-    backgroundColor: '#FFF',
+    backgroundColor: brandColors.background,
 
-    marginTop: 6,
-    padding: 10,
+    marginTop: s(4),
+    paddingHorizontal: s(16),
+    paddingTop: s(8),
     flex: 1,
   },
+  dealHero: {
+    marginHorizontal: s(16),
+    marginTop: s(10),
+    marginBottom: s(12),
+    borderRadius: s(28),
+    paddingHorizontal: s(20),
+    paddingVertical: s(20),
+    backgroundColor: brandColors.tealPrimary,
+    ...brandShadow.teal,
+  },
+  heroEyebrow: {
+    fontSize: fs(10),
+    lineHeight: fs(14),
+    fontWeight: '900',
+    letterSpacing: 1.6,
+    color: 'rgba(255,255,255,0.68)',
+  },
+  heroTitle: {
+    marginTop: s(6),
+    fontSize: fs(26),
+    lineHeight: fs(32),
+    fontWeight: '900',
+    color: brandColors.surface,
+  },
+  heroSubtitle: {
+    marginTop: s(8),
+    fontSize: fs(13),
+    lineHeight: fs(20),
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.76)',
+  },
   titleHotDeal: {
-    fontSize: 16,
-    color: '#595959',
+    fontSize: fs(18),
+    color: brandColors.textDark,
+    fontWeight: '800',
 
   },
   subTitleHotDeal: {
-    marginTop: 6,
-    marginBottom: 6,
-    fontSize: 12,
-    color: '#8C8C8C',
+    marginTop: s(6),
+    marginBottom: s(20),
+    fontSize: fs(12),
+    color: brandColors.muted,
 
-    lineHeight: 20,
+    lineHeight: fs(20),
   },
   distributors: {
-    marginTop: 1,
-    height: 66,
-    backgroundColor: 'white',
+    height: s(78),
+    backgroundColor: brandColors.background,
     justifyContent: 'space-around',
     alignItems: 'center',
+    paddingHorizontal: s(8),
   },
   listDistributors: {
     flexGrow: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: brandColors.background,
   },
 })
 

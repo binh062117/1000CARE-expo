@@ -6,6 +6,8 @@ import { user } from '~/assets/constants'
 import strings from '~/i18n'
 import { getListNoti } from '~/store/actions'
 import { useDispatch } from 'react-redux'
+import { s, fs } from '~/utils/responsive'
+import { brandColors } from '~/design-system/tokens'
 
 const MenuItem = ({ data, navigation, isLoggedIn, onShowMessage, lengthNotiNonRead }) => {
   const dispatch = useDispatch()
@@ -56,7 +58,7 @@ const MenuItem = ({ data, navigation, isLoggedIn, onShowMessage, lengthNotiNonRe
           }
           {data.text == strings.profileScreen.notification && lengthNotiNonRead != 0 ?
             <View style={styles.viewNonNoti}>
-              <Text style={{ color: 'white', fontSize: 10 }}>{lengthNotiNonRead >= 100 ? '99+' : lengthNotiNonRead}</Text>
+              <Text style={{ color: brandColors.surface, fontSize: fs(10), fontWeight: '800' }}>{lengthNotiNonRead >= 100 ? '99+' : lengthNotiNonRead}</Text>
             </View>
             : undefined
           }
@@ -70,41 +72,44 @@ const MenuItem = ({ data, navigation, isLoggedIn, onShowMessage, lengthNotiNonRe
 const styles = StyleSheet.create({
   wrapper: {
     width: '100%',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    backgroundColor: '#FFF',
+    paddingHorizontal: s(18),
+    paddingVertical: s(12),
+    backgroundColor: brandColors.surface,
 
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
   wrapperIcon: {
-    width: 42,
-    height: 42,
-    borderRadius: 42,
+    width: s(42),
+    height: s(42),
+    borderRadius: s(16),
 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: s(24),
+    height: s(24),
   },
   text: {
-    marginLeft: 12,
-    fontSize: 14,
-    color: '#595959',
+    marginLeft: s(12),
+    fontSize: fs(14),
+    color: brandColors.textDark,
     fontWeight: '500',
   },
   viewNonNoti: {
     position: 'absolute',
-    top: -5,
-    right: -5,
-    backgroundColor: 'red',
-    borderRadius: 30,
-    height: 20,
-    width: 20,
+    top: -s(6),
+    right: -s(6),
+    backgroundColor: brandColors.danger,
+    borderRadius: s(11),
+    minWidth: s(22),
+    height: s(22),
+    paddingHorizontal: s(4),
+    borderWidth: 2,
+    borderColor: brandColors.surface,
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -28,6 +28,9 @@ import SimilarProduct from './SimilarProduct/index'
 import TopProduct from './TopProduct/index'
 import RecommendProduct from './RecommendProduct/index'
 import Voucher from './Voucher/index'
+import AppScreen from '~/design-system/AppScreen'
+import AppSection from '~/design-system/AppSection'
+import { brandColors } from '~/design-system/tokens'
 
 const ProductDetailScreen = (props) => {
   const { product: orgProduct, distributorId: orgDistributorId, combo: isProductCombo, goBack } = props.route.params
@@ -203,10 +206,10 @@ const ProductDetailScreen = (props) => {
   }, [errorProductDetails, statusProductDetails])
   // console.log('EMPTYYYYYYYYYYYYYYY:', errorProductDetails, errorProductDetails.includes('Tài khoản của bạn chưa được kiểm duyệt'))
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <AppScreen>
       <View style={{ flex: 1 }}>
         <StatusBar
-          backgroundColor={Colors.backgroundColor}
+          backgroundColor={brandColors.background}
         />
         <View style={styles.mainContainer}>
           <Header
@@ -234,6 +237,7 @@ const ProductDetailScreen = (props) => {
             <ScrollView
               style={{ flex: 1 }}
               ref={scrollRef}
+              showsVerticalScrollIndicator={false}
             >
               <View style={styles.productContainer}>
                 <ProductInfo
@@ -241,107 +245,105 @@ const ProductDetailScreen = (props) => {
                   favorClick={favorClick}
                   openImage={(urlImage) => openImage(urlImage)}
                 />
-                <View
-                  style={{
-                    height: 2,
-                    backgroundColor: Colors.backgroundColor,
-                  }}
-                />
-                <View style={[styles.quantityContainer, { paddingBottom: product?.price != product?.sale_price ? 5 : 16 }]}>
-                  <View style={styles.priceContainer}>
+              </View>
+              <View style={styles.purchasePanel}>
+                <View style={styles.purchaseHeader}>
+                  <View>
+                    <Text style={styles.metaLabel}>Giá bán</Text>
                     <Text style={styles.productPrice}>
                       {formatMoney(product?.sale_price ? product?.sale_price : null)}
                     </Text>
                   </View>
-                  {
-                    !isProductCombo && (
-                      <AmountInput
-                        value={quantity.toString()}
-                        keyboardType='numeric'
-                        onChangeText={(text) => {
-                          if (!isNaN(text)) {
-                            if (Number(text) <= 10000000) {
-                              setQuantity(Number(text))
-                            } else {
-                              setQuantity(10000000)
-                              setMessage(`Không được quá ${formatMoney(10000000, { unit: '' })} sản phẩm`)
-                              setOpenMessage(true)
-                              setTimeout(() => {
-                                setOpenMessage(false)
-                              }, 1000)
-                            }
-                          }
-                        }}
-                        onEndEditing={() => {
-                          const qty = Number(quantity)
-                          if (qty > 0) {
-                              const productQty = safeProduct.qty || 0
-                                if (qty - productQty > 0) {
-                                  addProd(qty - productQty)
-                                } else if (qty - productQty < 0) {
-                                  subProd(productQty - qty)
-                                }
+                  {!isProductCombo && (
+                    <AmountInput
+                      value={quantity.toString()}
+                      keyboardType='numeric'
+                      onChangeText={(text) => {
+                        if (!isNaN(text)) {
+                          if (Number(text) <= 10000000) {
+                            setQuantity(Number(text))
                           } else {
-                            setQuantity(safeProduct.qty || 1)
+                            setQuantity(10000000)
+                            setMessage(`Không được quá ${formatMoney(10000000, { unit: '' })} sản phẩm`)
+                            setOpenMessage(true)
+                            setTimeout(() => {
+                              setOpenMessage(false)
+                            }, 1000)
                           }
-                        }}
-                        onMinus={() => subProd(1)}
-                        onPlus={() => addProd(1)}
-                      />
-                    )
-                  }
+                        }
+                      }}
+                      onEndEditing={() => {
+                        const qty = Number(quantity)
+                        if (qty > 0) {
+                            const productQty = safeProduct.qty || 0
+                              if (qty - productQty > 0) {
+                                addProd(qty - productQty)
+                              } else if (qty - productQty < 0) {
+                                subProd(productQty - qty)
+                              }
+                        } else {
+                          setQuantity(safeProduct.qty || 1)
+                        }
+                      }}
+                      onMinus={() => subProd(1)}
+                      onPlus={() => addProd(1)}
+                    />
+                  )}
                 </View>
                 {product?.price != product?.sale_price
-                  ? <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                  ? <View style={styles.discountRow}>
                     <Text style={styles.discount}>{formatMoney(product?.price, { unit: 'đ', space: false })}</Text>
-                    <Text style={{ marginLeft: 10, color: '#FA5858', fontSize: 14 }}>-{(100 - (Number(product?.sale_price) / Number(product?.price)) * 100).toFixed(1)}%</Text>
+                    <Text style={styles.discountPercent}>-{(100 - (Number(product?.sale_price) / Number(product?.price)) * 100).toFixed(1)}%</Text>
                   </View>
                   : null}
-                {
-                  !isProductCombo && (
-                    <Button
-                      styleView={styles.btnAddContainer}
-                      styleButton={styles.btnAdd}
-                      styleText={{
-                        fontSize: 14,
-                        fontWeight: '700',
-                      }}
-                      onPressEvent={() => addProductToCart()}
-                      text={strings.productDetailScreen.addToCart}
-                    />
-                  )
-                }
+                {!isProductCombo && (
+                  <Button
+                    styleView={styles.btnAddContainer}
+                    styleButton={styles.btnAdd}
+                    styleText={styles.btnAddText}
+                    onPressEvent={() => addProductToCart()}
+                    text={strings.productDetailScreen.addToCart}
+                  />
+                )}
               </View>
-              <ProductPromotion
-                addProduct={addProduct}
-                distributorId={distributorId}
-                navigation={props.navigation}
-                product={product}
-              />
-              <Voucher
-                navigation={props.navigation}
-                distributorId={distributorId}
-                product={product}
-              />
-              <SimilarProduct
-                scrollToTop={scrollToTop}
-                distributorId={distributorId}
-                navigation={props.navigation}
-                product={product}
-              />
-              <TopProduct
-                scrollToTop={scrollToTop}
-                distributorId={distributorId}
-                navigation={props.navigation}
-                product={product}
-              />
-              <ProductDescription product={product} />
-              <RecommendProduct
-                scrollToTop={scrollToTop}
-                distributorId={distributorId}
-                navigation={props.navigation}
-                product={product}
-              />
+              <AppSection title="Ưu đãi đang áp dụng">
+                <ProductPromotion
+                  addProduct={addProduct}
+                  distributorId={distributorId}
+                  navigation={props.navigation}
+                  product={product}
+                />
+                <Voucher
+                  navigation={props.navigation}
+                  distributorId={distributorId}
+                  product={product}
+                />
+              </AppSection>
+              <AppSection title="Sản phẩm liên quan">
+                <SimilarProduct
+                  scrollToTop={scrollToTop}
+                  distributorId={distributorId}
+                  navigation={props.navigation}
+                  product={product}
+                />
+                <TopProduct
+                  scrollToTop={scrollToTop}
+                  distributorId={distributorId}
+                  navigation={props.navigation}
+                  product={product}
+                />
+              </AppSection>
+              <AppSection title="Thông tin sản phẩm">
+                <ProductDescription product={product} />
+              </AppSection>
+              <AppSection title="Gợi ý cho bạn">
+                <RecommendProduct
+                  scrollToTop={scrollToTop}
+                  distributorId={distributorId}
+                  navigation={props.navigation}
+                  product={product}
+                />
+              </AppSection>
             </ScrollView>}
         </View>
       </View>
@@ -371,7 +373,7 @@ const ProductDetailScreen = (props) => {
         isOpen={openMessage}
         onClose={() => setOpenMessage(false)}
       />
-    </SafeAreaView>
+    </AppScreen>
   )
 }
 

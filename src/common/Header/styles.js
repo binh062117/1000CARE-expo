@@ -1,16 +1,18 @@
 import { StyleSheet } from 'react-native'
 import Colors from '~/common/Colors/Colors'
+import { s, fs } from '~/utils/responsive'
+import { brandColors } from '~/design-system/tokens'
 
 export default StyleSheet.create({
   headerContainer: {
-    height: 60,
-    backgroundColor: 'white',
+    height: s(64),
+    backgroundColor: brandColors.surface,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   titleContainer: {
-    height: 58,
+    height: s(62),
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -18,29 +20,29 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: Colors.textColor2,
+    fontWeight: '800',
+    fontSize: fs(18),
+    color: brandColors.textDark,
     width: '80%',
     textAlign: 'center',
     textAlignVertical: 'center',
-    marginLeft: -35,
+    marginLeft: -s(35),
   },
   backBtn: {
-    padding: 12,
+    padding: s(12),
   },
   cartQuantityContainer: {
     display: 'flex',
     flexDirection: 'row',
-    marginRight: 12,
+    marginRight: s(12),
   },
   buttonReadAllNoti: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.systemColor2,
-    marginRight: 10,
-    padding: 5,
-    paddingHorizontal: 10,
-    borderRadius: 5,
+    marginRight: s(10),
+    padding: s(6),
+    paddingHorizontal: s(12),
+    borderRadius: s(12),
   },
 })

@@ -9,6 +9,8 @@ import MenuUser from './MenuUser'
 import NoAuth from './NoAuth'
 import ErrorView from '~/common/ErrorView/index'
 import { check_info } from '~/assets/constants'
+import { brandColors } from '~/design-system/tokens'
+import { s } from '~/utils/responsive'
 
 const ProfileScreen = props => {
   const [openMessage, setOpenMessage] = useState(false)
@@ -34,10 +36,10 @@ const ProfileScreen = props => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: brandColors.background }}>
     <ScrollView
-      style={{ backgroundColor: '#FFF' }}
-      contentContainerStyle={{ flexGrow: 1 }}
+      style={{ backgroundColor: brandColors.background }}
+      contentContainerStyle={{ flexGrow: 1, paddingBottom: s(112) }}
     >
       {
         isLoggedIn ? (

@@ -15,6 +15,7 @@ import Status from '~/common/Status/Status'
 import ErrorView from '~/common/ErrorView/index'
 import Colors from '~/common/Colors/Colors'
 import { Fonts } from '~/assets/config'
+import { brandColors } from '~/design-system/tokens'
 
 const Voucher = ({ navigation, route }) => {
   const isSelect = route?.params?.isSelect
@@ -128,7 +129,7 @@ const Voucher = ({ navigation, route }) => {
     <SafeAreaView
       style={{ 
         flex:1,
-        backgroundColor: Colors.backgroundColor,
+        backgroundColor: brandColors.background,
       }}
     >
       <Header
@@ -136,6 +137,11 @@ const Voucher = ({ navigation, route }) => {
         leftAction={() => navigation.pop()}
         iconLeft={back}
       />
+      <View style={styles.hero}>
+        <Text style={styles.heroEyebrow}>VOUCHER WALLET</Text>
+        <Text style={styles.heroTitle}>Ưu đãi của bạn</Text>
+        <Text style={styles.heroSubtitle}>Quản lý voucher có sẵn, đã dùng và hết hạn trong cùng một nơi.</Text>
+      </View>
       {
         !isSelect && (
           <View

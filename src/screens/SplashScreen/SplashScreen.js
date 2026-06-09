@@ -18,6 +18,7 @@ import Status from '~/common/Status/Status';
 import { asyncStorage } from '~/store/index';
 import { loadNccFavorite } from '~/store/auth/authActions';
 import DeviceInfo from 'react-native-device-info';
+import { brandColors } from '~/design-system/tokens';
 
 const SplashScreen = ({ navigation }) => {
   const { isConnected } = useContext(NetworkContext);
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: brandColors.background,
   },
   logo: {
     width: 163,

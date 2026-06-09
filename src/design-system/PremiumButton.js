@@ -2,12 +2,18 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { s, fs } from '../utils/responsive';
+import { brandColors, brandGradients, brandShadow } from './tokens';
 
-const PremiumButton = ({ text, onPress, style, textStyle }) => {
+const PremiumButton = ({ text, onPress, style, textStyle, colors = brandGradients.primary, disabled }) => {
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={[styles.container, style]}>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.78}
+      style={[styles.container, disabled && styles.disabled, style]}
+      disabled={disabled}
+    >
       <LinearGradient
-        colors={['#00616D', '#0B7B8A']}
+        colors={disabled ? [brandColors.border, brandColors.border] : colors}
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
@@ -23,23 +29,24 @@ const styles = StyleSheet.create({
     borderRadius: s(16),
     overflow: 'hidden',
     marginVertical: s(8),
-    shadowColor: '#0B7B8A',
-    shadowOffset: { width: 0, height: s(4) },
-    shadowOpacity: 0.2,
-    shadowRadius: s(5),
-    elevation: 5,
+    ...brandShadow.teal,
   },
   gradient: {
     paddingVertical: s(14),
     paddingHorizontal: s(24),
     alignItems: 'center',
     justifyContent: 'center',
+    minHeight: s(56),
   },
   text: {
-    color: '#fff',
+    color: brandColors.surface,
     fontSize: fs(16),
-    fontWeight: '600',
-    letterSpacing: 0.5,
+    fontWeight: '800',
+    letterSpacing: 0,
+  },
+  disabled: {
+    shadowOpacity: 0,
+    elevation: 0,
   },
 });
 

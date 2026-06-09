@@ -22,7 +22,7 @@ import strings from '~/i18n';
 import { logoNeoMed, back } from '~/assets/constants';
 import { NAVIGATION_CONFIRM } from '~/navigation/routes';
 import Status from '~/common/Status/Status';
-import Colors from '~/common/Colors/Colors';
+import { brandColors, brandGradients } from '~/design-system/tokens';
 
 const LoginPhone = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -79,7 +79,7 @@ const LoginPhone = ({ navigation }) => {
   }, [loginStatus]);
 
   return (
-    <PremiumBackground colors={['#FFFFFF', '#F0F9FF']}>
+    <PremiumBackground colors={brandGradients.light}>
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps={'always'}
@@ -92,7 +92,7 @@ const LoginPhone = ({ navigation }) => {
               width: 44, 
               height: 44, 
               borderRadius: 22, 
-              backgroundColor: '#F8F9FA',
+              backgroundColor: brandColors.surface,
               justifyContent: 'center',
               alignItems: 'center',
               marginBottom: 30 
@@ -110,10 +110,10 @@ const LoginPhone = ({ navigation }) => {
             <View style={{ 
               width: 120, 
               height: 120, 
-              backgroundColor: '#FFFFFF',
+              backgroundColor: brandColors.surface,
               borderRadius: 30,
               padding: 10,
-              shadowColor: '#0B7B8A',
+              shadowColor: brandColors.tealPrimary,
               shadowOffset: { width: 0, height: 10 },
               shadowOpacity: 0.1,
               shadowRadius: 20,
@@ -123,16 +123,16 @@ const LoginPhone = ({ navigation }) => {
             }}>
               <Image source={logoNeoMed} resizeMode="contain" style={{ width: 90, height: 90 }} />
             </View>
-            <Text style={{ fontSize: 32, fontWeight: '900', color: '#0B7B8A', marginTop: 15, letterSpacing: 1 }}>1000CARE</Text>
-            <Text style={{ fontSize: 14, color: '#6d787e', fontWeight: '500', marginTop: 5 }}>Chăm sóc sức khỏe tận tâm</Text>
+            <Text style={{ fontSize: 32, fontWeight: '900', color: brandColors.tealPrimary, marginTop: 15, letterSpacing: 0 }}>1000CARE</Text>
+            <Text style={{ fontSize: 14, color: brandColors.muted, fontWeight: '500', marginTop: 5 }}>Chăm sóc sức khỏe tận tâm</Text>
           </Animated.View>
 
           <Animated.View style={{ 
             opacity: fadeAnim,
             transform: [{ translateY: slideAnim }]
           }}>
-            <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1A202C', marginBottom: 8 }}>{strings.loginScreen.title}</Text>
-            <Text style={{ fontSize: 15, color: '#718096', marginBottom: 30, lineHeight: 22 }}>
+            <Text style={{ fontSize: 26, fontWeight: '800', color: brandColors.textDark, marginBottom: 8 }}>{strings.loginScreen.title}</Text>
+            <Text style={{ fontSize: 15, color: brandColors.muted, marginBottom: 30, lineHeight: 22 }}>
               Vui lòng nhập số điện thoại để bắt đầu hành trình chăm sóc sức khỏe của bạn.
             </Text>
 
@@ -151,10 +151,10 @@ const LoginPhone = ({ navigation }) => {
             />
             
             <View style={{ marginTop: 25, alignItems: 'center' }}>
-              <Text style={{ color: '#718096', fontSize: 14 }}>
+              <Text style={{ color: brandColors.muted, fontSize: 14 }}>
                 Bạn chưa có tài khoản? {' '}
                 <Text 
-                  style={{ color: '#0B7B8A', fontWeight: 'bold' }}
+                  style={{ color: brandColors.tealPrimary, fontWeight: '800' }}
                   onPress={() => navigation.navigate('RegisterScreen')}
                 >
                   Đăng ký ngay
@@ -166,9 +166,9 @@ const LoginPhone = ({ navigation }) => {
 
         <View style={{ padding: 24, alignItems: 'center' }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-            <View style={{ height: 1, flex: 1, backgroundColor: '#E2E8F0' }} />
-            <Text style={{ marginHorizontal: 15, color: '#A0AEC0', fontSize: 12, fontWeight: '600' }}>HỖ TRỢ 24/7</Text>
-            <View style={{ height: 1, flex: 1, backgroundColor: '#E2E8F0' }} />
+            <View style={{ height: 1, flex: 1, backgroundColor: brandColors.border }} />
+            <Text style={{ marginHorizontal: 15, color: brandColors.mutedLight, fontSize: 12, fontWeight: '700' }}>HỖ TRỢ 24/7</Text>
+            <View style={{ height: 1, flex: 1, backgroundColor: brandColors.border }} />
           </View>
           
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -176,14 +176,14 @@ const LoginPhone = ({ navigation }) => {
               onPress={() => Linking.openURL('tel:0966492818')}
               style={{ paddingHorizontal: 10 }}
             >
-              <Text style={{ color: '#0B7B8A', fontWeight: '700', fontSize: 15 }}>096 649 2818</Text>
+              <Text style={{ color: brandColors.tealPrimary, fontWeight: '700', fontSize: 15 }}>096 649 2818</Text>
             </TouchableOpacity>
-            <Text style={{ color: '#CBD5E0' }}>|</Text>
+            <Text style={{ color: brandColors.border }}>|</Text>
             <TouchableOpacity 
               onPress={() => Linking.openURL('tel:0358525558')}
               style={{ paddingHorizontal: 10 }}
             >
-              <Text style={{ color: '#0B7B8A', fontWeight: '700', fontSize: 15 }}>035 852 5558</Text>
+              <Text style={{ color: brandColors.tealPrimary, fontWeight: '700', fontSize: 15 }}>035 852 5558</Text>
             </TouchableOpacity>
           </View>
         </View>

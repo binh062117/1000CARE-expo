@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
 import TouchReceptor from '../TouchReceptor/TouchReceptor';
-import {ThemeContext} from '../../theme';
 import {DIMENS} from '../../constants';
+import { s } from '~/utils/responsive';
+import { brandColors, brandShadow } from '~/design-system/tokens';
 
 const OUTLINE = 'outline';
 const CLEAR = 'clear';
@@ -17,14 +18,13 @@ const Card = ({
   children,
 }) => {
   const ViewGroup = onPress ? TouchReceptor : React.Fragment;
-  const {theme} = useContext(ThemeContext);
-  const shadow = type === SHADOW ? shadowStyle(theme) : {};
+  const shadow = type === SHADOW ? shadowStyle() : {};
 
   return (
     <ViewGroup {...(onPress && {onPress, disabled})}>
       <View
         style={StyleSheet.flatten([
-          styles.container(type, theme),
+          styles.container(type),
           shadow,
           style,
         ])}>
@@ -34,23 +34,16 @@ const Card = ({
   );
 };
 
-const shadowStyle = theme => ({
-  shadowColor: theme.black,
-  shadowOffset: {
-    width: 0,
-    height: 2,
-  },
-  shadowOpacity: 0.1,
-  shadowRadius: 2,
-  elevation: 1,
+const shadowStyle = () => ({
+  ...brandShadow.soft,
 });
 
 const styles = {
-  container: (type, theme) => ({
+  container: (type) => ({
     borderWidth: type === OUTLINE ? DIMENS.common.borderWidth : 0,
-    borderColor: theme.borderColor,
-    borderRadius: DIMENS.common.borderRadius,
-    backgroundColor: theme.surfaceColor,
+    borderColor: brandColors.borderSoft,
+    borderRadius: s(24),
+    backgroundColor: brandColors.surface,
   }),
 };
 

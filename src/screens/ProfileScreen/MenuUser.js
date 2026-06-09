@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { Alert, View, StyleSheet, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import strings from '~/i18n'
 import {
@@ -12,7 +12,8 @@ import { safety_certificate, poweroff, mail, credit_card, group_people, gift, ac
 import packageJson from '../../../package.json'
 
 import MenuItem from './MenuItem'
-import Colors from '~/common/Colors/Colors'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const MenuUser = ({ navigation, onShowMessage, listNotiNonRead }) => {
   const dispatch = useDispatch()
@@ -24,11 +25,20 @@ const MenuUser = ({ navigation, onShowMessage, listNotiNonRead }) => {
     setLengthNotiNonRead(Array.isArray(listNotiNonRead) ? listNotiNonRead.length : 0)
   }, [listNotiNonRead])
   const onLogoutPress = () => {
-    // auth()
-    //   .signOut()
-    //   .then(() => console.log('User signed out!'))
-    dispatch(resetCart())
-    dispatch(logout())
+    Alert.alert(
+      'Đăng xuất',
+      'Bạn có muốn đăng xuất?',
+      [
+        { text: 'Hủy', style: 'cancel' },
+        {
+          text: 'OK',
+          onPress: () => {
+            dispatch(resetCart())
+            dispatch(logout())
+          },
+        },
+      ],
+    )
   }
 
   const data = [
@@ -121,7 +131,7 @@ const MenuUser = ({ navigation, onShowMessage, listNotiNonRead }) => {
       icon: poweroff,
       colorIcon: 'rgba(109, 148, 245, 1)',
       onPress: () => onLogoutPress(),
-      routePath: NAVIGATION_TO_SPLASH_SCREEN,
+      routePath: '',
       isClickAvailable: true,
     })
   }
@@ -142,7 +152,8 @@ const MenuUser = ({ navigation, onShowMessage, listNotiNonRead }) => {
         style={{
           textAlign: 'center',
           width: '100%',
-          color: Colors.textColor1,
+          color: brandColors.muted,
+          fontSize: fs(12),
         }}
       >{`Version: ${versionApp}`}</Text>
     </View>
@@ -153,12 +164,16 @@ const styles = StyleSheet.create({
   wrapper: {
     width: '100%',
     flexGrow: 1,
-    paddingBottom: 24,
-    marginTop: 12,
-    backgroundColor: '#fff',
+    paddingBottom: s(20),
+    marginTop: s(4),
+    marginHorizontal: s(16),
+    backgroundColor: brandColors.surface,
+    borderRadius: s(24),
+    overflow: 'hidden',
+    ...brandShadow.soft,
 
-    borderTopColor: '#F5F5F5',
-    borderTopWidth: 4,
+    borderTopColor: brandColors.borderSoft,
+    borderTopWidth: 0,
     borderStyle: 'solid',
   },
 })

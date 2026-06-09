@@ -1,6 +1,8 @@
 /**
  * Colors containing for light theme
  */
+import { brandColors, brandGradients } from '~/design-system/tokens'
+
 const WHITE = '#fff'
 const GRAY_100 = '#f9f9f9'
 const GRAY_200 = '#e0e0e0'
@@ -9,7 +11,7 @@ const GRAY_400 = '#979da0'
 const GRAY_500 = '#6d787e'
 const GRAY_600 = '#354052'
 const BLACK = '#000'
-const PRIMARY_COLOR = '#2196F3'
+const PRIMARY_COLOR = brandColors.tealPrimary
 export default {
   // grey scale
   white: WHITE,
@@ -29,15 +31,15 @@ export default {
   /**
    * The background color appears behind scrollable content
    */
-  backgroundColor: GRAY_100,
+  backgroundColor: brandColors.background,
   /**
    * Surface colors affect surfaces(background) of components, such as cards, sheets, and menus
    */
-  surfaceColor: WHITE,
+  surfaceColor: brandColors.surface,
   /**
    * Use it for card border, InputText border etc.
    */
-  borderColor: GRAY_300,
+  borderColor: brandColors.border,
   /**
    * Default icon color
    */
@@ -48,9 +50,9 @@ export default {
    * primaryColor: To be used as background color for components which denotes primary action
    * primaryDarkColor: Darker shade of primary color, (can be used for border color or text color of components)
    */
-  primaryLightColor: '#53c3f8',
+  primaryLightColor: brandColors.tealLight,
   primaryColor: PRIMARY_COLOR,
-  primaryDarkColor: '#1976D2',
+  primaryDarkColor: brandColors.tealDark,
   /**
    * Color which will replace primary color,
    * when component is in disabled state
@@ -66,20 +68,20 @@ export default {
   /**
    * To be used for sub-heading text
    */
-  subHeadingTextColor: GRAY_600,
+  subHeadingTextColor: brandColors.textDark,
   /**
    * The default color of text in many components.
    * To be used for normal text like paragraph
    */
-  bodyTextColor: GRAY_500,
+  bodyTextColor: brandColors.muted,
   /**
    * To be used for hint/label text component
    */
-  labelTextColor: GRAY_400,
+  labelTextColor: brandColors.mutedLight,
   /**
    * Green shade for success messages and icons.
    */
-  successColor: '#52c41a',
+  successColor: brandColors.success,
   /**
    * Red shade for error messages and icons
    */
@@ -98,10 +100,10 @@ export default {
    * Note: If statusBarColor is light, set barStyle to `dark-content` else `light-content`
    */
   appbar: {
-    statusBarColor: '#fff',
+    statusBarColor: brandColors.surface,
     barStyle: 'dark-content',
-    backgroundColor: '#fff',
-    tintColor: '#fff',
+    backgroundColor: brandColors.surface,
+    tintColor: brandColors.tealPrimary,
   },
   mainColor: {
     primary: '#1976D2',
@@ -126,7 +128,7 @@ export default {
     bg_side_bar: '#fdfef9',
     side_menu_wrapper: '#2a3541',
     header_tab_active_viettel_pay: '#1184B5',
-    gradient_header_tab_viettel_pay: ['#00bca0', '#007edc'],
+    gradient_header_tab_viettel_pay: brandGradients.primary,
     news_dot: 'rgba(0,0,0,1)',
     border_input_update: '#ddd',
     dim: 'rgba(0, 0, 0, 0.4)',

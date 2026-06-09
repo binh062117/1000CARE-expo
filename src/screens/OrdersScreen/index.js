@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, FlatList, SafeAreaView, BackHandler, TouchableOpacity, TextInput, Platform } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import styles from './styles';
 import EmptyItem from './EmptyItem/index';
@@ -11,7 +10,6 @@ import { getChangeOrderError, getChangeOrderStatus, getListOrders, getUserConfir
 import { getOrders, paymentOrder, requestChangeOrderStatus, requestUserConfirm, resetChangeOrderStatus } from '~/store/orders/OrderActions';
 import { CommonActions } from '@react-navigation/native';
 import { NAVIGATION_ORDER_DETAIL_SCREEN, NAVIGATION_TO_MAIN_SCREEN } from '~/navigation/routes';
-import CustomHeader from '~/common/CustomHeader/index';
 import strings from '~/i18n';
 import { Text } from '~/common/index';
 import { getAuthStore } from '~/store/selector';
@@ -23,6 +21,7 @@ import BottomSheet from '~/common/BottomSheet/index';
 import RadioButtonGroup from '~/common/RadioButtonGroup/RadioButtonGroup';
 import { KeyboardAvoidingView } from 'react-native';
 import { showToast } from '~/utils/toast';
+import { brandColors } from '~/design-system/tokens';
 
 const OrdersStatus = [
   {
@@ -236,18 +235,13 @@ const OrdersScreen = props => {
     }
   }, [userConfirmStatus]);
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <KeyboardAwareScrollView
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps={'always'}
-        contentContainerStyle={{ flex: 1 }}
-      >
-        <View style={styles.mainContainer}>
-          <CustomHeader
-            navigation={props.navigation}
-            title={strings.orders.title}
-            search={false}
-          />
+    <SafeAreaView style={{ flex: 1, backgroundColor: brandColors.background }}>
+      <View style={styles.mainContainer}>
+          <View style={styles.ordersHero}>
+            <Text style={styles.heroEyebrow}>ORDER DESK</Text>
+            <Text style={styles.heroTitle}>{strings.orders.title}</Text>
+            <Text style={styles.heroSubtitle}>Theo dõi trạng thái, thanh toán và mua lại đơn hàng trong một màn hình.</Text>
+          </View>
 
           <View style={styles.listProductContainer}>
             {
@@ -338,7 +332,7 @@ const OrdersScreen = props => {
             onClose={() => setShowError(false)}
             error={userConfirmError}
           />
-        </View>
+      </View>
         {/* <BottomSheet
           title={
             <Text style={styles.title}>
@@ -408,9 +402,7 @@ const OrdersScreen = props => {
             </View>
           </KeyboardAvoidingView>
         </BottomSheet> */}
-      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
 export default OrdersScreen;
-

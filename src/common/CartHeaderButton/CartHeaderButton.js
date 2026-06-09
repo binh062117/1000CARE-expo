@@ -8,8 +8,10 @@ import { getInfo } from '~/store/actions'
 import { getAuthStore } from '~/store/selector'
 import { showToast } from '~/utils/toast'
 import strings from '~/i18n'
+import { s, fs } from '~/utils/responsive'
+import { brandColors } from '~/design-system/tokens'
 
-const CartHeaderButton = ({ navigation, color = '#4F4F4F' }) => {
+const CartHeaderButton = ({ navigation, color = brandColors.tealPrimary }) => {
   const listItem = useSelector((state) => getListItem(state))
   const dispatch = useDispatch()
   const { isLoggedIn } = useSelector(state => getAuthStore(state))
@@ -51,7 +53,7 @@ const CartHeaderButton = ({ navigation, color = '#4F4F4F' }) => {
           type={'antdesign'}
           name={'shopping-cart'}
           color={color}
-          size={25}
+          size={s(24)}
         />
         <View style={styles.badge}>
           <Text style={styles.badgeText}>{getNumberProducts()}</Text>
@@ -72,26 +74,36 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   cartLayout: {
-    width: 40,
-    height: 30,
+    width: s(40),
+    height: s(34),
     alignItems: 'center',
+    justifyContent: 'center',
   },
   badge: {
     position: 'absolute',
-    top: -8,
-    right: 0,
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: '#EB5757',
+    top: -s(6),
+    right: -s(6),
+    minWidth: s(22),
+    height: s(22),
+    borderRadius: s(11),
+    paddingHorizontal: s(4),
+    backgroundColor: brandColors.danger,
+    borderWidth: 2,
+    borderColor: brandColors.surface,
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: brandColors.danger,
+    shadowOffset: { width: 0, height: s(2) },
+    shadowOpacity: 0.15,
+    shadowRadius: s(3),
+    elevation: 2,
   },
   badgeText: {
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontSize: 12,
-    color: '#FFFFFF',
+    fontSize: fs(10),
+    color: brandColors.surface,
+    fontWeight: '800',
   },
 
 })

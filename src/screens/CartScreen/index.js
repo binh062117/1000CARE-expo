@@ -1,22 +1,115 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { View, FlatList, SafeAreaView, StatusBar } from 'react-native'
+import { View, FlatList, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native'
 
 import styles from './styles'
 import strings from '~/i18n'
 import EmptyItem from './EmptyItem/index'
 import { getAddCartInfoStatus, getCartStatus, getListItem, getUpdateCartStatus } from '~/store/cart/cartSelectors'
-import Header from '~/common/Header/index'
 import { addOptionInfo, getAddressBooksRequest, getInfo, resetStatusCartInfo, updateCart } from '~/store/actions'
 
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { getAddressBooks, getAddressRequestStatus } from '~/store/selector'
 import { useState } from 'react'
 import Status from '~/common/Status/Status'
 import Amount from './Amount/index'
 import CartItem from './CartItem'
 import DialogInfo from '~/common/DialogInfo/index'
-import { Button, Text } from '~/common/index'
+import { Button, Icon, Text } from '~/common/index'
+import { brandColors } from '~/design-system/tokens'
+
+const mockCartData = {
+  shipping_address: null,
+  sub_total: { amount: 1720000 },
+  grand_total: { amount: 1520000 },
+  items: [
+    {
+      distributor: {
+        id: 10001,
+        name: '1000CARE Distribution',
+        nick_name: '1000CARE',
+        order_limit: 500000,
+      },
+      items: [
+        {
+          payment_type: 1,
+          promo_infos: [],
+          promo_products: [],
+          items: [
+            {
+              id: 90001,
+              product_id: 90001,
+              distributor_id: 10001,
+              product_name: 'Vitamin C 1000mg hộp 30 viên',
+              qty: 2,
+              price: 185000,
+              origin_price: 220000,
+              payment_type: 1,
+              product_status: 1,
+              is_promotion: false,
+              images: ['https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'],
+              images_resize: [],
+              range_prices: [
+                { min_quantity: 5, discount: 5, sale_price: 175000 },
+                { min_quantity: 10, discount: 8, sale_price: 168000 },
+              ],
+            },
+            {
+              id: 90002,
+              product_id: 90002,
+              distributor_id: 10001,
+              product_name: 'Nước súc miệng kháng khuẩn 500ml',
+              qty: 3,
+              price: 95000,
+              origin_price: 95000,
+              payment_type: 1,
+              product_status: 1,
+              is_promotion: false,
+              images: ['https://images.unsplash.com/photo-1603398938378-e54eab446dde?w=400'],
+              images_resize: [],
+              range_prices: [],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      distributor: {
+        id: 10002,
+        name: 'Nhà cung cấp Dược phẩm An Tâm',
+        nick_name: 'An Tâm Pharma',
+        order_limit: 300000,
+      },
+      items: [
+        {
+          payment_type: 1,
+          promo_infos: [],
+          promo_products: [],
+          items: [
+            {
+              id: 90003,
+              product_id: 90003,
+              distributor_id: 10002,
+              product_name: 'Khẩu trang y tế 4 lớp hộp 50 cái',
+              qty: 10,
+              price: 32000,
+              origin_price: 40000,
+              payment_type: 1,
+              product_status: 1,
+              is_promotion: false,
+              images: ['https://images.unsplash.com/photo-1584634731339-252c581abfc5?w=400'],
+              images_resize: [],
+              range_prices: [],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
+const shouldUseMockCart = (cartData, statusGetCart) => {
+  return statusGetCart === Status.ERROR || !cartData || !Array.isArray(cartData?.items)
+}
 
 const CartScreen = props => {
   const cartData = useSelector((state) => getListItem(state))
@@ -39,6 +132,11 @@ const CartScreen = props => {
   const statusUpdateCart = useSelector(state => getUpdateCartStatus(state))
 
   const dispatch = useDispatch()
+  const effectiveCartData = shouldUseMockCart(cartData, statusGetCart) ? mockCartData : cartData
+
+  useEffect(() => {
+    dispatch(getInfo())
+  }, [])
 
   useEffect(() => {
     if (statusUpdateCart === Status.SUCCESS) {
@@ -47,13 +145,14 @@ const CartScreen = props => {
   }, [statusUpdateCart])
 
   const getProducts = useCallback(() => {
-    if (cartData && cartData?.items) {
-      const data = cartData
-      if (!cartData || !cartData.items)
+    if (effectiveCartData && effectiveCartData?.items) {
+      const data = effectiveCartData
+      if (!effectiveCartData || !effectiveCartData.items)
         return []
       return data.items
     }
-  }, [cartData])
+    return []
+  }, [effectiveCartData])
 
   useEffect(() => {
     setTimeout(() => {
@@ -71,7 +170,7 @@ const CartScreen = props => {
 
   useEffect(() => {
     setOpenDialog(false)
-    if (!cartData || !cartData.items || cartData?.shipping_address)
+    if (shouldUseMockCart(cartData, statusGetCart) || !cartData || !cartData.items || cartData?.shipping_address)
       return
     if (addressData && addressData.length > 0) {
       for (let i = 0; i < addressData.length; i++) {
@@ -82,7 +181,7 @@ const CartScreen = props => {
         }
       }
     }
-  }, [cartData, addressData])
+  }, [cartData, addressData, statusGetCart])
   useEffect(() => {
     if (chooseAll) {
       const allIds = []
@@ -137,24 +236,30 @@ const CartScreen = props => {
   }, [listSelectedIds])
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: brandColors.background }}>
       <StatusBar
-        backgroundColor='white'
+        backgroundColor={brandColors.background}
       />
-      <Header
-        title={strings.cartDetail.title}
-        leftAction={() => {
-          dispatch(resetStatusCartInfo())
-          props.navigation.pop()
-        }}
-      />
-      <KeyboardAwareScrollView
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps={'always'}
-        style={styles.listProductContainer}
-      >
+      <View style={styles.checkoutHero}>
+        <TouchableOpacity
+          activeOpacity={0.82}
+          style={styles.backButton}
+          onPress={() => {
+            dispatch(resetStatusCartInfo())
+            props.navigation.pop()
+          }}
+        >
+          <Icon type="feather" name="arrow-left" size={20} color={brandColors.surface} />
+        </TouchableOpacity>
+        <View style={styles.checkoutCopy}>
+          <Text style={styles.checkoutEyebrow}>CHECKOUT</Text>
+          <Text style={styles.checkoutTitle}>{strings.cartDetail.title}</Text>
+          <Text style={styles.checkoutSubtitle}>Rà soát sản phẩm, địa chỉ và giới hạn đặt hàng trước khi thanh toán.</Text>
+        </View>
+      </View>
+      <View style={styles.listProductContainer}>
         <FlatList
-          data={productInCart}
+        data={productInCart}
           scrollEnabled={true}
           renderItem={({ item, index }) => {
             return (
@@ -177,7 +282,7 @@ const CartScreen = props => {
                       distributor={item.distributor}
                       item={item2}
                       index={index}
-                      cartData={cartData}
+                      cartData={effectiveCartData}
                       listSelectedIds={listSelectedIds}
                       setSelection={(product, action, force, products) => {
                         console.log('productItem', product)
@@ -234,7 +339,7 @@ const CartScreen = props => {
             return index.toString()
           }}
         />
-      </KeyboardAwareScrollView>
+      </View>
 
       <View
         style={styles.bottomContainer}
@@ -254,6 +359,7 @@ const CartScreen = props => {
           chooseAll={chooseAll}
           setChooseAll={(isCheckBox) => setChooseAll(isCheckBox)}
           fullSelectedIds={fullSelectedIds}
+          cartDataOverride={effectiveCartData}
         />
       </View>
       <DialogInfo
@@ -301,4 +407,3 @@ const CartScreen = props => {
   )
 }
 export default CartScreen
-

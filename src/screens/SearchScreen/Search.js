@@ -10,6 +10,8 @@ import ProductItem from '~/common/ProductItem/ProductItem'
 import Colors from '~/common/Colors/Colors'
 import EmptyItem from '~/common/EmptyItem/index'
 import { searchProducts, searchDistributors, searchPharmacies } from '~/services/meilisearch'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const SEARCH_TABS = {
   ALL: 0,
@@ -164,8 +166,8 @@ const Search = ({ navigation }) => {
   )
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar backgroundColor='rgba(53, 108, 233, 0.85)' />
+    <SafeAreaView style={{ flex: 1, backgroundColor: brandColors.background }}>
+      <StatusBar backgroundColor={brandColors.surface} />
       <SearchBar
         ref_input={ref_input}
         navigation={navigation}
@@ -175,6 +177,13 @@ const Search = ({ navigation }) => {
         textSearch={textSearch}
       />
 
+      <View style={styles.searchHero}>
+        <Text style={styles.heroEyebrow}>SMART SEARCH</Text>
+        <Text style={styles.heroTitle}>Tìm đúng sản phẩm nhanh hơn</Text>
+        <Text style={styles.heroSubtitle}>Tra cứu sản phẩm, nhà phân phối và nhà thuốc từ một màn hình.</Text>
+      </View>
+
+      <View style={styles.tabShell}>
       <View style={styles.tabContainer}>
         <TouchableOpacity
           style={[styles.tabButton, tab === SEARCH_TABS.PRODUCT && styles.tabButtonActive]}
@@ -200,6 +209,7 @@ const Search = ({ navigation }) => {
         >
           <Text style={[styles.tabText, tab === SEARCH_TABS.ALL && styles.tabTextActive]}>Tất cả</Text>
         </TouchableOpacity>
+      </View>
       </View>
 
       {isLoading ? <LoadingView /> : null}
@@ -268,67 +278,105 @@ const Search = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   listProductsContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginHorizontal: 10,
+    paddingHorizontal: s(12),
+    paddingBottom: s(96),
   },
   listContainer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: s(16),
+    paddingBottom: s(96),
   },
   wrap: {
-    display: 'flex',
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: Colors.white,
+    backgroundColor: brandColors.background,
+  },
+  tabShell: {
+    backgroundColor: brandColors.background,
+    paddingHorizontal: s(16),
+    paddingBottom: s(12),
+  },
+  searchHero: {
+    marginHorizontal: s(16),
+    marginTop: s(12),
+    marginBottom: s(12),
+    borderRadius: s(24),
+    padding: s(16),
+    backgroundColor: brandColors.tealDark,
+    ...brandShadow.teal,
+  },
+  heroEyebrow: {
+    fontSize: fs(10),
+    lineHeight: fs(14),
+    fontWeight: '900',
+    letterSpacing: 1.5,
+    color: brandColors.goldAccent,
+  },
+  heroTitle: {
+    marginTop: s(5),
+    fontSize: fs(22),
+    lineHeight: fs(28),
+    fontWeight: '900',
+    color: brandColors.surface,
+  },
+  heroSubtitle: {
+    marginTop: s(7),
+    fontSize: fs(12),
+    lineHeight: fs(18),
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.7)',
   },
   tabContainer: {
     flexDirection: 'row',
-    backgroundColor: Colors.white,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    backgroundColor: brandColors.tealLight,
+    borderRadius: s(16),
+    padding: s(4),
   },
   tabButton: {
     flex: 1,
-    paddingVertical: 12,
+    paddingVertical: s(10),
     alignItems: 'center',
+    borderRadius: s(12),
   },
   tabButtonActive: {
-    borderBottomWidth: 3,
-    borderBottomColor: Colors.colorMain,
+    backgroundColor: brandColors.surface,
+    ...brandShadow.soft,
   },
   tabText: {
-    fontSize: 13,
-    color: Colors.textColor3,
+    fontSize: fs(12),
+    color: brandColors.muted,
+    fontWeight: '700',
   },
   tabTextActive: {
-    fontWeight: 'bold',
-    color: Colors.colorMain,
+    fontWeight: '900',
+    color: brandColors.tealPrimary,
   },
   listItem: {
-    backgroundColor: Colors.white,
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
+    backgroundColor: brandColors.surface,
+    padding: s(16),
+    borderRadius: s(20),
+    marginTop: s(10),
+    borderWidth: 1,
+    borderColor: brandColors.borderSoft,
+    ...brandShadow.soft,
   },
   listItemTitle: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: Colors.textColor3,
-    marginBottom: 4,
+    fontSize: fs(15),
+    fontWeight: '800',
+    color: brandColors.textDark,
+    marginBottom: s(4),
   },
   listItemSubtitle: {
-    fontSize: 13,
-    color: '#888',
+    fontSize: fs(13),
+    color: brandColors.muted,
   },
   sectionHeader: {
-    backgroundColor: '#F5F5F5',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    backgroundColor: brandColors.background,
+    paddingHorizontal: s(16),
+    paddingVertical: s(12),
   },
   sectionHeaderText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: Colors.colorMain,
+    fontSize: fs(14),
+    fontWeight: '800',
+    color: brandColors.tealPrimary,
   },
 })
 

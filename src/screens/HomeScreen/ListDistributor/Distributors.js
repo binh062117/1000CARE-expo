@@ -10,6 +10,7 @@ import { s, fs } from '~/utils/responsive'
 
 const Distributors = ({ navigation, onItemPress }) => {
   const listDistributors = useSelector(state => getListDistributors(state))
+  const hasDistributors = Array.isArray(listDistributors) && listDistributors.length > 0
 
   return (
     <View style={styles.container}>
@@ -33,44 +34,51 @@ const Distributors = ({ navigation, onItemPress }) => {
         </TouchableOpacity>
       </View>
 
-      <Swiper
-        showsButtons
-        style={{
-          height: 2 * ((DIMENS.common.WINDOW_WIDTH - 5 * 6 - 12) / 3) * 1.05 + s(20),
-        }}
-        showsPagination={false}
-        autoplay={false}
-        loadMinimal={true}
-        loadMinimalSize={1}
-        nextButton={<Text />}
-        prevButton={<Text />}
-      >
-        {Array.from({ length: Math.ceil(listDistributors.length / 6) }, (_, i) => i + 1).map((value, idx) => (
-          <View key={`page_${idx}`} style={styles.swiperPage}>
-            <View style={styles.row}>
-              {listDistributors.filter((_, id) => (value - 1) * 6 <= id && id < value * 6 - 3).map((item, index) => (
-                <ItemDistributor
-                  key={`dist_top_${item.id || item.Id || index}`}
-                  onItemPress={() => onItemPress(item)}
-                  data={item}
-                />
-              ))}
+      {hasDistributors ? (
+        <Swiper
+          showsButtons
+          style={styles.swiper}
+          showsPagination={false}
+          autoplay={false}
+          loadMinimal={true}
+          loadMinimalSize={1}
+          nextButton={<Text />}
+          prevButton={<Text />}
+        >
+          {Array.from({ length: Math.ceil(listDistributors.length / 6) }, (_, i) => i + 1).map((value, idx) => (
+            <View key={`page_${idx}`} style={styles.swiperPage}>
+              <View style={styles.row}>
+                {listDistributors.filter((_, id) => (value - 1) * 6 <= id && id < value * 6 - 3).map((item, index) => (
+                  <ItemDistributor
+                    key={`dist_top_${item.id || item.Id || index}`}
+                    onItemPress={() => onItemPress(item)}
+                    data={item}
+                  />
+                ))}
+              </View>
+              <View style={styles.row}>
+                {listDistributors.filter((_, id) => (value - 1) * 6 + 3 <= id && id < value * 6).map((item, index) => (
+                  <ItemDistributor
+                    key={`dist_bot_${item.id || item.Id || index}`}
+                    onItemPress={() => onItemPress(item)}
+                    data={item}
+                  />
+                ))}
+              </View>
             </View>
-            <View style={styles.row}>
-              {listDistributors.filter((_, id) => (value - 1) * 6 + 3 <= id && id < value * 6).map((item, index) => (
-                <ItemDistributor
-                  key={`dist_bot_${item.id || item.Id || index}`}
-                  onItemPress={() => onItemPress(item)}
-                  data={item}
-                />
-              ))}
-            </View>
-          </View>
-        ))}
-      </Swiper>
+          ))}
+        </Swiper>
+      ) : (
+        <View style={styles.emptyState}>
+          <Text style={styles.emptyTitle}>Đang tải nhà cung cấp</Text>
+          <Text style={styles.emptySubtitle}>Danh sách sẽ hiển thị sau khi dữ liệu sẵn sàng</Text>
+        </View>
+      )}
     </View>
   )
 }
+
+const swiperHeight = 2 * ((DIMENS.common.WINDOW_WIDTH - 5 * 6 - 12) / 3) * 1.05 + s(20)
 
 const styles = StyleSheet.create({
   container: {
@@ -84,6 +92,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.06,
     shadowRadius: 12,
     elevation: 3,
+  },
+  swiper: {
+    height: swiperHeight,
   },
   header: {
     flexDirection: 'row',
@@ -130,6 +141,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+  },
+  emptyState: {
+    minHeight: s(118),
+    marginHorizontal: s(16),
+    borderRadius: s(18),
+    backgroundColor: '#F8FBFC',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: s(18),
+  },
+  emptyTitle: {
+    color: '#1A1A2E',
+    fontSize: fs(14),
+    fontWeight: '800',
+  },
+  emptySubtitle: {
+    marginTop: s(4),
+    color: '#6D787E',
+    fontSize: fs(12),
+    textAlign: 'center',
   },
 })
 

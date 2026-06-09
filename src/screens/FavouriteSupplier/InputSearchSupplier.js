@@ -4,6 +4,8 @@ import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { Icon } from '../../common'
 import { getSearchDistributor, resetSearchDistributor } from '~/store/actions'
 import _ from 'lodash'
+import { s, fs } from '~/utils/responsive'
+import { brandColors } from '~/design-system/tokens'
 
 const InputSearchSupplier = (props) => {
   const dispatch = useDispatch()
@@ -58,34 +60,35 @@ const InputSearchSupplier = (props) => {
 const styles = StyleSheet.create({
   wrap: {
     width: '100%',
-    paddingHorizontal: 10,
-    paddingBottom: 10,
-    backgroundColor: 'white',
+    padding: s(12),
+    backgroundColor: brandColors.surface,
   },
   input: {
     width: '100%',
-    height: 40,
-    backgroundColor: '#FFF',
-    paddingLeft: 42,
-    borderRadius: 6,
-    color: '#595959',
-    paddingRight: 50,
+    height: s(48),
+    backgroundColor: brandColors.background,
+    paddingLeft: s(42),
+    borderRadius: s(16),
+    color: brandColors.textDark,
+    paddingRight: s(48),
     borderWidth: 1,
-    borderColor: '#CCCCCC',
+    borderColor: brandColors.border,
+    fontSize: fs(14),
+    fontWeight: '700',
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: s(24),
+    height: s(24),
     position: 'absolute',
-    left: 25,
-    top: 10,
+    left: s(25),
+    top: s(24),
   },
   iconCancel: {
-    width: 25,
-    height: 24,
+    width: s(30),
+    height: s(30),
     position: 'absolute',
-    right: 15,
-    top: 10,
+    right: s(18),
+    top: s(21),
   },
 })
 

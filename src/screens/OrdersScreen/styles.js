@@ -1,23 +1,59 @@
 import { StyleSheet } from 'react-native'
 import { Fonts } from '~/assets/config'
 import Colors from '~/common/Colors/Colors'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const styles = StyleSheet.create({
   mainContainer: { 
     flex:1,
     display: 'flex',
     justifyContent:'space-between',
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: brandColors.background,
+  },
+  ordersHero: {
+    marginHorizontal: s(16),
+    marginTop: s(10),
+    marginBottom: s(12),
+    borderRadius: s(28),
+    paddingHorizontal: s(20),
+    paddingVertical: s(20),
+    backgroundColor: brandColors.textDark,
+    ...brandShadow.soft,
+  },
+  heroEyebrow: {
+    fontSize: fs(10),
+    lineHeight: fs(14),
+    fontWeight: '900',
+    letterSpacing: 1.6,
+    color: brandColors.goldAccent,
+  },
+  heroTitle: {
+    marginTop: s(6),
+    fontSize: fs(26),
+    lineHeight: fs(32),
+    fontWeight: '900',
+    color: brandColors.surface,
+  },
+  heroSubtitle: {
+    marginTop: s(8),
+    fontSize: fs(13),
+    lineHeight: fs(20),
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.66)',
   },
   
   listItem: {
-    marginVertical: 12,
-    backgroundColor: Colors.white,
+    marginVertical: s(12),
+    marginHorizontal: s(16),
+    backgroundColor: brandColors.surface,
+    borderRadius: s(20),
+    ...brandShadow.soft,
   },
 
   listProductContainer: {
     flex: 2,
-    backgroundColor: Colors.white,
+    backgroundColor: brandColors.background,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -25,55 +61,63 @@ const styles = StyleSheet.create({
 
   listStatus: {
     flex: 1,
-    maxHeight: 57,
-    marginBottom: 2,
+    maxHeight: s(64),
+    marginBottom: s(8),
+    backgroundColor: brandColors.background,
   },
 
   contentListStatus: {
-    height: 57,
+    minHeight: s(60),
+    paddingHorizontal: s(16),
+    alignItems: 'center',
   },
 
   itemSeparator: {
-    height: 2,
-    backgroundColor: Colors.backgroundColor,
+    height: s(8),
+    backgroundColor: brandColors.background,
   },
 
   statusLabel: {
     textAlign: 'center',
-    color: Colors.textColor3,
+    color: brandColors.muted,
     fontFamily: Fonts.medium,
-    fontSize: 14,
-    lineHeight: 22,
-    fontWeight: '500',
+    fontSize: fs(12),
+    lineHeight: fs(18),
+    fontWeight: '800',
   },
 
   statusLabelSelected: {
     textAlign: 'center',
-    color: Colors.systemColor2,
-    fontSize: 14,
+    color: brandColors.surface,
+    fontSize: fs(12),
     fontFamily: Fonts.medium,
-    lineHeight: 22,
-    fontWeight: '700',
+    lineHeight: fs(18),
+    fontWeight: '900',
   },
 
   statusLabelContainer: {
-    paddingVertical: 16,
-    paddingHorizontal: 18,
+    paddingVertical: s(10),
+    paddingHorizontal: s(16),
+    borderRadius: s(18),
+    marginRight: s(8),
+    backgroundColor: brandColors.surface,
+    borderWidth: 1,
+    borderColor: brandColors.borderSoft,
   },
 
   statusLabelContainerSelected: {
-    borderBottomColor: Colors.systemColor2,
-    borderBottomWidth: 2,
+    backgroundColor: brandColors.tealPrimary,
+    borderColor: brandColors.tealPrimary,
   },
 
   closeBtnContainer: {
     position: 'absolute',
-    right: 8,
-    top: 8,
+    right: s(8),
+    top: s(8),
   },
   closeBtn: {
-    height: 12,
-    width: 12,
+    height: s(12),
+    width: s(12),
   },
   title: {
     // alignSelf: 'center',
@@ -81,13 +125,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: Fonts.bold,
     textAlign: 'center',
-    fontSize: 14,
-    lineHeight: 22,
+    fontSize: fs(14),
+    lineHeight: fs(22),
+    color: brandColors.textDark,
   },
 
   bottomSheetContainer: {
     height: '100%',
-    backgroundColor: Colors.white,
+    backgroundColor: brandColors.surface,
   },
   radioButtonContainer: {
     flexDirection: 'column',
@@ -95,22 +140,23 @@ const styles = StyleSheet.create({
   },
   radioButtonItem: {
     width: '100%',
-    marginBottom: 18,
-    marginHorizontal: 18,
+    marginBottom: s(18),
+    marginHorizontal: s(18),
   },
   bottomSheetActionContainer: {
     position: 'absolute',
-    height: 50,
+    height: s(64),
     borderTopWidth: 1,
-    borderTopColor: Colors.gray,
+    borderTopColor: brandColors.border,
     bottom: 0,
     width: '100%',
-    padding: 4,
+    padding: s(8),
   },
   btnContainer: {
     width: '100%',
     height: '100%',
-    backgroundColor: Colors.errorColor,
+    backgroundColor: brandColors.danger,
+    borderRadius: s(20),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -119,25 +165,25 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.gray,
   },
   btnText: {
-    color: Colors.white,
-    borderRadius: 2,
-    fontSize: 14,
+    color: brandColors.surface,
+    borderRadius: s(2),
+    fontSize: fs(14),
     fontFamily: Fonts.bold,
   },
   searchInput: {
-    marginHorizontal: 18,
-    marginTop: -9,
+    marginHorizontal: s(18),
+    marginTop: -s(9),
   },
   warningContainer: {
-    margin: 18,
-    backgroundColor: '#f9edbe', 
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    borderRadius: 4,
+    margin: s(18),
+    backgroundColor: '#FFF5D8',
+    paddingVertical: s(8),
+    paddingHorizontal: s(12),
+    borderRadius: s(12),
   },
   warningText: {
     fontFamily: Fonts.bold,
-    color: '#FF9900',
+    color: brandColors.warning,
   },
 })
 

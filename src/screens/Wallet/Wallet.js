@@ -8,6 +8,9 @@ import { getAccounts, getUserId } from '~/store/selector'
 import { NAVIGATION_TOPUP_SCREEN, NAVIGATION_WALLET_DETAIL } from '~/navigation/routes'
 import WalletItem from './WalletItem'
 import EmptyItem from '~/common/EmptyItem/index'
+import { Text } from '~/common/index'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const Wallet = props => {
   const type = props.route?.params?.type
@@ -37,13 +40,19 @@ const Wallet = props => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: brandColors.background }}>
       <Header
         title={type === 'topup' ? 'Nạp tiền' : strings.walletList.title}
         leftAction={() => props.navigation.goBack()}
       />
+      <View style={styles.hero}>
+        <Text style={styles.heroEyebrow}>POINT WALLET</Text>
+        <Text style={styles.heroTitle}>{type === 'topup' ? 'Chọn ví nạp điểm' : strings.walletList.title}</Text>
+        <Text style={styles.heroSubtitle}>Theo dõi số dư điểm mua hàng theo từng nhà phân phối.</Text>
+      </View>
       <FlatList
-        style={{ flexGrow: 0, marginTop: 10 }}
+        style={{ flexGrow: 0, marginTop: 10, backgroundColor: brandColors.background }}
+        contentContainerStyle={{ paddingBottom: 96 }}
         data={accounts}
         keyExtractor={keyExtractorAccount}
         renderItem={({ item }) => {
@@ -66,3 +75,35 @@ const Wallet = props => {
   )
 }
 export default Wallet
+
+const styles = {
+  hero: {
+    marginHorizontal: s(16),
+    marginTop: s(12),
+    borderRadius: s(26),
+    padding: s(18),
+    backgroundColor: brandColors.textDark,
+    ...brandShadow.soft,
+  },
+  heroEyebrow: {
+    fontSize: fs(10),
+    lineHeight: fs(14),
+    fontWeight: '900',
+    letterSpacing: 1.5,
+    color: brandColors.goldAccent,
+  },
+  heroTitle: {
+    marginTop: s(6),
+    fontSize: fs(24),
+    lineHeight: fs(30),
+    fontWeight: '900',
+    color: brandColors.surface,
+  },
+  heroSubtitle: {
+    marginTop: s(8),
+    fontSize: fs(12),
+    lineHeight: fs(18),
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.68)',
+  },
+}

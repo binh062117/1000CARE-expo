@@ -14,6 +14,9 @@ import EmptyItem from '~/common/EmptyItem/index'
 import ProductItemListView from '~/common/ProductItemListView/ProductItemListView'
 import ErrorView from '~/common/ErrorView/index'
 import { check_info } from '~/assets/constants'
+import AppSection from '~/design-system/AppSection'
+import { brandColors, brandShadow } from '~/design-system/tokens'
+import { s, fs } from '~/utils/responsive'
 
 const ListViewListProduct = ({ navigation, products, loadMore, onShowMessage, setMessage, setOpenMessage }) => {
   const keyExtractorProduct = useCallback((_, idx) => {
@@ -23,9 +26,7 @@ const ListViewListProduct = ({ navigation, products, loadMore, onShowMessage, se
     <FlatList
       numColumns={1}
       style={{ flex: 1 }}
-      contentContainerStyle={[styles.listProductsContainer, {
-        marginHorizontal: 4,
-      }]}
+      contentContainerStyle={styles.listProductsContainer}
       data={products}
       keyExtractor={keyExtractorProduct}
       onEndReachedThreshold={0.1}
@@ -244,7 +245,7 @@ const ListAllProduct = ({ navigation, distributorId, onFavorClick, onAddProduct,
       style={styles.wrap}
     >
       <View
-        style={styles.swiper}
+        style={styles.heroCard}
       >
         <Swiper
           style={styles.swiper}
@@ -258,32 +259,29 @@ const ListAllProduct = ({ navigation, distributorId, onFavorClick, onAddProduct,
           {renderImage}
         </Swiper>
       </View>
-      <SearchBar
-        navigation={navigation}
-        type={'product_by_distributor'}
-        viewMode={viewMode}
-        setViewMode={setViewMode}
-        onTabChange={item => handleGetProduct(item)}
-        onLoad={(supplierSelected, cateSelected) => {
-          setQuery({
-            supplierSelected, cateSelected,
-          })
-        }}
-        query={query}
-        distributorId={distributorId}
-      />
-      {listProduct && viewMode === 'grid' ? (
-        <GridViewListProduct 
+      <View style={styles.filterPanel}>
+        <SearchBar
           navigation={navigation}
-          products={getData()}
-          loadMore={loadMore}
-          onShowMessage={onShowMessage}
-          setMessage={setMessage}
-          setOpenMessage={setOpenMessage}
+          type={'product_by_distributor'}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+          onTabChange={item => handleGetProduct(item)}
+          onLoad={(supplierSelected, cateSelected) => {
+            setQuery({
+              supplierSelected, cateSelected,
+            })
+          }}
+          query={query}
+          distributorId={distributorId}
         />
-      ) :
-        (
-          <ListViewListProduct 
+      </View>
+      <AppSection
+        title={currentTab?.name || 'Sản phẩm'}
+        subtitle={viewMode === 'grid' ? 'Hiển thị dạng lưới' : 'Hiển thị dạng danh sách'}
+        style={styles.productsSection}
+      >
+        {listProduct && viewMode === 'grid' ? (
+          <GridViewListProduct
             navigation={navigation}
             products={getData()}
             loadMore={loadMore}
@@ -291,8 +289,19 @@ const ListAllProduct = ({ navigation, distributorId, onFavorClick, onAddProduct,
             setMessage={setMessage}
             setOpenMessage={setOpenMessage}
           />
-        )
-      }
+        ) :
+          (
+            <ListViewListProduct
+              navigation={navigation}
+              products={getData()}
+              loadMore={loadMore}
+              onShowMessage={onShowMessage}
+              setMessage={setMessage}
+              setOpenMessage={setOpenMessage}
+            />
+          )
+        }
+      </AppSection>
       {/* <FlatList
         numColumns={2}
         contentContainerStyle={styles.listProductsContainer}
@@ -327,35 +336,50 @@ export default ListAllProduct
 
 const styles = StyleSheet.create({
   listProductsContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginHorizontal: 9,
+    paddingHorizontal: s(12),
+    paddingBottom: s(96),
   },
   wrap: {
-    display: 'flex',
     flex: 1,
-    justifyContent: 'center',
-    marginTop: 6,
-    backgroundColor: Colors.backgroundColor,
-    alignItems: 'center',
+    marginTop: s(6),
+    backgroundColor: brandColors.background,
   },
   banner: {
-    width: DIMENS.common.WINDOW_WIDTH - 16,
-    height: (DIMENS.common.WINDOW_WIDTH - 16) * 2 / 5,
-    paddingHorizontal: 8,
-    marginBottom: 4,
-    borderRadius: 2,
+    width: DIMENS.common.WINDOW_WIDTH - s(32),
+    height: (DIMENS.common.WINDOW_WIDTH - s(32)) * 2 / 5,
+    borderRadius: s(24),
   },
   swiper: {
-    height: DIMENS.common.WINDOW_WIDTH * 2 / 5,
+    height: (DIMENS.common.WINDOW_WIDTH - s(32)) * 2 / 5,
+  },
+  heroCard: {
+    marginHorizontal: s(16),
+    marginTop: s(12),
+    borderRadius: s(24),
+    overflow: 'hidden',
+    backgroundColor: brandColors.surface,
+    ...brandShadow.teal,
   },
   swiperItemContainer: {
     backgroundColor: 'transparent',
-    height: DIMENS.common.WINDOW_WIDTH * 2 / 5,
+    height: (DIMENS.common.WINDOW_WIDTH - s(32)) * 2 / 5,
     alignItems: 'center',
   },
   swiperItem: {
-    width: DIMENS.common.WINDOW_WIDTH,
-    height: DIMENS.common.WINDOW_WIDTH * 2 / 5,
+    width: DIMENS.common.WINDOW_WIDTH - s(32),
+    height: (DIMENS.common.WINDOW_WIDTH - s(32)) * 2 / 5,
+  },
+  filterPanel: {
+    marginHorizontal: s(16),
+    marginTop: s(16),
+    borderRadius: s(24),
+    backgroundColor: brandColors.surface,
+    borderWidth: 1,
+    borderColor: brandColors.borderSoft,
+    overflow: 'hidden',
+    ...brandShadow.soft,
+  },
+  productsSection: {
+    flex: 1,
   },
 })

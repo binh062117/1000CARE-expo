@@ -10,10 +10,11 @@ import { NAVIGATION_PAYMENT_CHECKOUT_SCREEN } from '~/navigation/routes'
 import styles from './styles'
 import { getCheckoutInfo } from '~/store/actions'
 
-const Amount = ({ navigation, openMessage, arrayOrderLimit, listSelectedIds, chooseAll, setChooseAll, fullSelectedIds }) => {
+const Amount = ({ navigation, openMessage, arrayOrderLimit, listSelectedIds, chooseAll, setChooseAll, fullSelectedIds, cartDataOverride }) => {
   console.log('AAAAAAABBBBCCCCCCCCCC:', listSelectedIds, arrayOrderLimit)
   const dispatch = useDispatch()
-  const cartData = useSelector((state) => getListItem(state))
+  const cartDataStore = useSelector((state) => getListItem(state))
+  const cartData = cartDataOverride || cartDataStore
   const [isEnableBuy, setIsEnableBuy] = useState(false)
   const [isCheckDistriLimited, setIsCheckDistriLimited] = useState(false)
   const [isCheckBox, setIsCheckBox] = useState(true)
@@ -122,9 +123,10 @@ const Amount = ({ navigation, openMessage, arrayOrderLimit, listSelectedIds, cho
               flexDirection: 'row',
               justifyContent: 'space-around',
               alignItems: 'center',
+              paddingHorizontal: 32,
             }}
           >
-            <View style={{ marginLeft: 18, width: '30%' }}>
+            <View style={{ width: '30%' }}>
               <CheckBox
                 checked={isCheckBox}
                 onPress={() => setChooseAll(!isCheckBox)}

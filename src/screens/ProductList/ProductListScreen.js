@@ -17,6 +17,8 @@ import { setSelectedDistri } from '~/store/actions'
 import { NAVIGATION_TO_HOME_SCREEN } from '~/navigation/routes'
 import ProductItemListView from '~/common/ProductItemListView/ProductItemListView'
 import SearchBar from './SearchBar'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const ListViewListProduct = ({ navigation, products, loadMore, onShowMessage, setMessage, setOpenMessage }) => {
   const keyExtractorProduct = useCallback((_, idx) => {
@@ -282,7 +284,7 @@ const ProductListScreen = ({ navigation, route }) => {
     }
   }
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: brandColors.background }}>
       <Header
         leftAction={() => navigation.pop()}
         iconLeft={back}
@@ -310,23 +312,30 @@ const ProductListScreen = ({ navigation, route }) => {
         } : null}
         titleStyles={type === 'propose'? { marginLeft: -50 } : { marginLeft:0 }}
       />
+      <View style={styles.marketHero}>
+        <Text style={styles.heroEyebrow}>PRODUCT CATALOG</Text>
+        <Text style={styles.heroTitle} numberOfLines={2}>{title || 'Danh sách sản phẩm'}</Text>
+        <Text style={styles.heroSubtitle}>Lọc, xem nhanh và thêm sản phẩm vào giỏ theo nhà phân phối đã chọn.</Text>
+      </View>
       {
         (type === 'product_by_distributor' || type === 'priceSock') && (
-          <SearchBar
-            navigation={navigation}
-            type={type}
-            viewMode={viewMode}
-            setViewMode={setViewMode}
-            onLoad={(supplierSelected, cateSelected, distributorSelected) => {
-              setQuery({
-                supplierSelected, cateSelected, distributorSelected,
-              })
-            }}
-            distributorId={distributorId}
-            onTabChange={handleGetProduct}
-            query={query}
-            mode={type === 'priceSock' ? 'distributor' : 'supplier'}
-          />
+          <View style={styles.filterPanel}>
+            <SearchBar
+              navigation={navigation}
+              type={type}
+              viewMode={viewMode}
+              setViewMode={setViewMode}
+              onLoad={(supplierSelected, cateSelected, distributorSelected) => {
+                setQuery({
+                  supplierSelected, cateSelected, distributorSelected,
+                })
+              }}
+              distributorId={distributorId}
+              onTabChange={handleGetProduct}
+              query={query}
+              mode={type === 'priceSock' ? 'distributor' : 'supplier'}
+            />
+          </View>
         )
       }
       <View
@@ -368,32 +377,67 @@ export default ProductListScreen
 
 const styles = StyleSheet.create({
   listProductsContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginHorizontal: 9,
+    paddingHorizontal: s(12),
+    paddingBottom: s(96),
   },
   wrap: {
-    display: 'flex',
     flex: 1,
-    justifyContent: 'center',
-    marginTop: 6,
-    backgroundColor: Colors.backgroundColor,
+    marginTop: s(10),
+    backgroundColor: brandColors.background,
   },
   title: {
-    color: Colors.systemColor2,
+    color: brandColors.tealPrimary,
     fontFamily: Fonts.bold,
-    fontSize: 16,
-    fontWeight: '700',
+    fontSize: fs(16),
+    fontWeight: '800',
     textAlign: 'center',
     textAlignVertical: 'center',
     width: 100,
   },
   titleContainer: {
     alignSelf: 'center',
-    display: 'flex',
     justifyContent: 'center',
-    height: 58,
+    height: s(58),
     flexDirection: 'column',
-    marginLeft: -40,
+    marginLeft: -s(40),
+  },
+  filterPanel: {
+    marginHorizontal: s(16),
+    marginTop: s(12),
+    borderRadius: s(24),
+    overflow: 'hidden',
+    backgroundColor: brandColors.surface,
+    borderWidth: 1,
+    borderColor: brandColors.borderSoft,
+    ...brandShadow.soft,
+  },
+  marketHero: {
+    marginHorizontal: s(16),
+    marginTop: s(12),
+    borderRadius: s(26),
+    padding: s(18),
+    backgroundColor: brandColors.textDark,
+    ...brandShadow.soft,
+  },
+  heroEyebrow: {
+    fontSize: fs(10),
+    lineHeight: fs(14),
+    fontWeight: '900',
+    letterSpacing: 1.5,
+    color: brandColors.goldAccent,
+  },
+  heroTitle: {
+    marginTop: s(6),
+    fontSize: fs(24),
+    lineHeight: fs(30),
+    fontWeight: '900',
+    color: brandColors.surface,
+  },
+  heroSubtitle: {
+    marginTop: s(8),
+    fontSize: fs(12),
+    lineHeight: fs(18),
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.68)',
   },
 })

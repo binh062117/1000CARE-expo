@@ -7,7 +7,13 @@ import { getTime, convertBirth } from '~/utils'
 
 const ItemListNoti = ({ item, index, onPress, isReadAll }) => {
   const [read, setRead] = useState(false)
-  const data = JSON.parse(item.data)
+  const data = (() => {
+    try {
+      return item?.data ? JSON.parse(item.data) : {}
+    } catch (_) {
+      return {}
+    }
+  })()
   useEffect(() => {
     setRead(item?.is_read)
   },[item])
@@ -20,7 +26,8 @@ const ItemListNoti = ({ item, index, onPress, isReadAll }) => {
       }}
       style={styles.buttonItem(read, isReadAll)}
     >
-      <View style={styles.viewBell}>
+      <View style={styles.statusRail(read, isReadAll)} />
+      <View style={styles.viewBell(read, isReadAll)}>
         <Image
           source={bell}
           style={styles.gift_fill}
@@ -28,11 +35,12 @@ const ItemListNoti = ({ item, index, onPress, isReadAll }) => {
         />
       </View>
       <View style={styles.content}>
-        <View style={{ maxHeight:130, overflow: 'hidden' }}>
+        <View style={styles.titleRow}>
           <Text
             numberOfLines={2}
             style={styles.title}
           >{item.title}</Text>
+          {!read && !isReadAll ? <View style={styles.unreadDot} /> : null}
         </View>
         <View>
           <Text style={styles.textTime}>{getTime(data.StartTime)} {convertBirth(data.StartDate)}</Text>

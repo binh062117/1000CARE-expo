@@ -6,6 +6,8 @@ import {
   Text,
   View,
 } from 'react-native'
+import { s, fs } from '~/utils/responsive'
+import { brandShadow } from '~/design-system/tokens'
 
 const Button = ({ text, onPressEvent, styleView, styleButton, styleText, disabled=false }) => {
   return (
@@ -25,20 +27,23 @@ const styles = StyleSheet.create({
   btn_container: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
-    paddingHorizontal:25,
+    minHeight: s(52),
+    paddingVertical: s(12),
+    paddingHorizontal: s(24),
     backgroundColor: Colors.systemColor2,
-    borderRadius: 5,
+    borderRadius: s(16),
+    ...brandShadow.teal,
   },
   container: {
-    paddingHorizontal:25,
+    paddingHorizontal: s(20),
   },
   loading: { position: 'absolute', left: 20 },
   text: {
     color: Colors.white,
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: fs(16),
+    fontWeight: '800',
     textAlign: 'center',
+    letterSpacing: 0,
   },
 })
 

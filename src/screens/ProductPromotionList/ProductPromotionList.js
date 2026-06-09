@@ -6,9 +6,12 @@ import ProductItem from '~/common/ProductItem/ProductItem'
 import { getListProducts } from '~/store/selector'
 import { getProductByPayment } from '~/store/actions'
 import Colors from '~/common/Colors/Colors'
+import { Text } from '~/common/index'
 import EmptyItem from './EmptyItem/index'
 import ErrorView from '~/common/ErrorView/index'
 import { check_info } from '~/assets/constants'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const ProductPaymentType = {
   NORMAL: 1,
@@ -70,13 +73,18 @@ const ProductPromotionList = ({ navigation, route }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: brandColors.background }}>
       <Header
         leftAction={() => navigation.pop()}
         title={'Đổi thưởng'}
         navigation={navigation}
         cart={true}
       />
+      <View style={styles.hero}>
+        <Text style={styles.heroEyebrow}>REWARD CATALOG</Text>
+        <Text style={styles.heroTitle}>Đổi thưởng bằng điểm</Text>
+        <Text style={styles.heroSubtitle}>Sản phẩm có thể thanh toán bằng điểm mua hàng từ nhà phân phối.</Text>
+      </View>
       <View
         style={styles.wrap}
       >
@@ -132,15 +140,41 @@ export default ProductPromotionList
 
 const styles = StyleSheet.create({
   listProductsContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginHorizontal: 9,
+    paddingHorizontal: s(12),
+    paddingBottom: s(96),
   },
   wrap: {
-    display: 'flex',
     flex: 1,
-    justifyContent: 'center',
-    marginTop: 10,
-    backgroundColor: Colors.white,
+    marginTop: s(10),
+    backgroundColor: brandColors.background,
+  },
+  hero: {
+    marginHorizontal: s(16),
+    marginTop: s(12),
+    borderRadius: s(26),
+    padding: s(18),
+    backgroundColor: brandColors.textDark,
+    ...brandShadow.soft,
+  },
+  heroEyebrow: {
+    fontSize: fs(10),
+    lineHeight: fs(14),
+    fontWeight: '900',
+    letterSpacing: 1.5,
+    color: brandColors.goldAccent,
+  },
+  heroTitle: {
+    marginTop: s(6),
+    fontSize: fs(24),
+    lineHeight: fs(30),
+    fontWeight: '900',
+    color: brandColors.surface,
+  },
+  heroSubtitle: {
+    marginTop: s(8),
+    fontSize: fs(12),
+    lineHeight: fs(18),
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.68)',
   },
 })

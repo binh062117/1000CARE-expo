@@ -19,6 +19,8 @@ import { getAuthStore } from '~/store/selector'
 import strings from '~/i18n'
 import { gift_fill } from '~/assets/constants'
 import { Fonts } from '~/assets/config'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const numColumns = 2
 const LAYOUTPADDING = 6 * 2
@@ -208,11 +210,11 @@ const ProductItem = ({ navigation, data, distributorId, type, addButton = true, 
                           data.sale_price !== data.price && (
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: -3 }}>
                               <Text style={styles.discount}>{formatMoney(data.price, { unit: 'đ', space: false })}</Text>
-                              <Text style={{ marginLeft: 6, color: '#FA5858', fontSize: 12 }}>-{(100 - (Number(data.sale_price) / Number(data.price)) * 100).toFixed(1)}%</Text>
+                              <Text style={{ marginLeft: 6, color: brandColors.danger, fontSize: fs(12) }}>-{(100 - (Number(data.sale_price) / Number(data.price)) * 100).toFixed(1)}%</Text>
                             </View>
                           )
                         }
-                        <Text style={{ color: '#071F77', fontSize: 12 }}>{data?.distributor?.nick_name ? data?.distributor?.nick_name : ''}</Text>
+                        <Text style={{ color: brandColors.tealDark, fontSize: fs(12) }}>{data?.distributor?.nick_name ? data?.distributor?.nick_name : ''}</Text>
                       </View>
                     )
                   }
@@ -222,7 +224,7 @@ const ProductItem = ({ navigation, data, distributorId, type, addButton = true, 
                         <View style={styles.salePriceContainer}>
                           <Text style={styles.salePrice}>{formatMoney(data.sale_price, { unit: 'điểm', space: false })}</Text>
                         </View>
-                        <Text style={{ color: '#071F77', fontSize: 12 }}>{data?.distributor?.nick_name ? data?.distributor?.nick_name : ''}</Text>
+                        <Text style={{ color: brandColors.tealDark, fontSize: fs(12) }}>{data?.distributor?.nick_name ? data?.distributor?.nick_name : ''}</Text>
                       </View>
                     )
                   }
@@ -314,22 +316,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textHeader: {
-    fontSize: 14,
-    color: '#262626',
+    fontSize: fs(14),
+    color: brandColors.textDark,
   },
   buttonAll: {
     height: 24,
-    borderRadius: 12,
+    borderRadius: s(12),
     borderWidth: 1,
-    borderColor: '#0B7B8A',
+    borderColor: brandColors.tealPrimary,
     alignItems: 'center',
     justifyContent: 'center',
   },
   textButton: {
     paddingHorizontal: LAYOUTPADDING,
     paddingVertical: 4,
-    fontSize: 12,
-    color: '#0B7B8A',
+    fontSize: fs(12),
+    color: brandColors.tealPrimary,
   },
   listProductsContainer: {
     marginTop: 20,
@@ -340,11 +342,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     display: 'flex',
     justifyContent: 'space-between',
-    backgroundColor: Colors.white,
-    margin: 5,
+    backgroundColor: brandColors.surface,
+    margin: s(5),
     borderWidth: 1,
-    borderColor: '#F1F1F1',
-    borderRadius: 6,
+    borderColor: brandColors.borderSoft,
+    borderRadius: s(18),
+    overflow: 'hidden',
+    ...brandShadow.soft,
   },
   productColumnContainer: {
     width: PRODUCT_COLUMN_WIDTH,
@@ -353,13 +357,13 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     height: IMAGE_CONTAINER_HEIGHT,
-    backgroundColor: 'white',
+    backgroundColor: brandColors.surface,
     alignItems: 'center',
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
+    borderTopLeftRadius: s(18),
+    borderTopRightRadius: s(18),
   },
   imageColumnContainer: {
-    backgroundColor: 'white',
+    backgroundColor: brandColors.surface,
     justifyContent: 'center',
     alignItems: 'center',
     width: PRODUCT_COLUMN_WIDTH,
@@ -368,8 +372,8 @@ const styles = StyleSheet.create({
   productImage: {
     width: '100%',
     height: IMAGE_HEIGHT,
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
+    borderTopLeftRadius: s(18),
+    borderTopRightRadius: s(18),
     resizeMode: 'cover',
   },
   productImageColumn: {
@@ -378,7 +382,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   productInfoContainer: {
-    padding: 8,
+    padding: s(10),
     paddingTop: 0,
     display: 'flex',
     flexDirection: 'row',
@@ -393,16 +397,16 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   productName: {
-    fontSize: 14,
-    color: Colors.textColor2,
-    lineHeight: 15,
-    height: 30,
+    fontSize: fs(14),
+    color: brandColors.textDark,
+    lineHeight: fs(18),
+    height: fs(38),
     flex: 2,
     marginRight: 3,
   },
   productColumName: {
-    fontSize: 14,
-    color: Colors.textColor2,
+    fontSize: fs(14),
+    color: brandColors.textDark,
     textAlign: 'center',
     textAlignVertical: 'center',
     lineHeight: 15,
@@ -410,27 +414,27 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   buttonAddContainer: {
-    backgroundColor: Colors.systemColor2,
-    width: 25,
-    height: 25,
-    borderRadius: 22,
+    backgroundColor: brandColors.tealPrimary,
+    width: s(30),
+    height: s(30),
+    borderRadius: s(15),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',
   },
   buttonAdd: {
-    width: 12,
-    height: 12,
-    borderRadius: 22,
+    width: s(13),
+    height: s(13),
+    borderRadius: s(12),
   },
   bottomContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   favorContainer: {
-    height: 28,
-    width: 28,
+    height: s(30),
+    width: s(30),
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
@@ -446,7 +450,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   price: {
-    fontSize: 12,
+    fontSize: fs(13),
     marginTop: 1,
     fontWeight: 'bold',
     color: Colors.priceColor,
@@ -458,14 +462,14 @@ const styles = StyleSheet.create({
     // flex: 2,
   },
   salePrice: {
-    fontSize: 14,
+    fontSize: fs(14),
     fontWeight: 'bold',
     color: Colors.priceColor,
     lineHeight: 22,
   },
   discount: {
-    fontSize: 12,
-    color: '#CCCCCC',
+    fontSize: fs(12),
+    color: brandColors.mutedLight,
     fontWeight: '500',
     lineHeight: 20,
     textDecorationLine: 'line-through',
@@ -478,7 +482,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: brandColors.tealLight,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -487,17 +491,17 @@ const styles = StyleSheet.create({
     height: 32,
     borderRadius: 28,
     marginHorizontal: 4,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: brandColors.tealLight,
     justifyContent: 'center',
     alignItems: 'center',
   },
   signText: {
-    color: '#595959',
-    fontSize: 14,
+    color: brandColors.muted,
+    fontSize: fs(14),
   },
   quatityInput: {
-    color: '#595959',
-    fontSize: 12,
+    color: brandColors.muted,
+    fontSize: fs(12),
     lineHeight: 15,
     flex: 1,
   },

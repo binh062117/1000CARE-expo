@@ -6,6 +6,7 @@ import { Image } from '~/common/index'
 
 import styles from './styles'
 import { NAVIGATION_ORDER_DETAIL_SCREEN } from '~/navigation/routes'
+import StatusBadge from '~/design-system/StatusBadge'
 
 const orderStatuses = [
   'Không xác định', // 0
@@ -41,6 +42,12 @@ const orderStatuses = [
 
 const OrderItem = ({ order, onPayment, navigation, goBack, onCancelOrder, buyAgain, confirmOrder }) => {
   // console.log('order?.order_status::::', order?.order_status)
+  const statusText = orderStatuses[order?.order_status] || orderStatuses[0]
+  const statusVariant = order?.order_status === 4 || order?.order_status === 7 ? 'success'
+    : order?.order_status === 12 || order?.order_status === 14 ? 'danger'
+      : order?.order_status === 1 || order?.order_status === 28 ? 'warning'
+        : 'info'
+
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(NAVIGATION_ORDER_DETAIL_SCREEN, {
@@ -53,42 +60,37 @@ const OrderItem = ({ order, onPayment, navigation, goBack, onCancelOrder, buyAga
       })}
       style={styles.orderContainer}
     >
-      <View
-        style={styles.logoContainer}
-      >
-        <Image
-          resizeMode="contain"
-          style={styles.logo}
-          source={{
-            uri: order?.distributor?.logo,
-          }}
-        />
+      <View style={styles.orderHeader}>
+        <View style={styles.orderCodeBlock}>
+          <Text style={styles.metaLabel}>Mã đơn hàng</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.orderTransId}>
+            {order.order_id}
+          </Text>
+        </View>
+        <StatusBadge text={statusText} variant={statusVariant} />
       </View>
 
-      <View
-        style={styles.orderInfoContainer}
-      >
-        <Text
-          numberOfLines={2}
-          ellipsizeMode='tail'
-          style={styles.orderTransId}
-        >
+      <View style={styles.distributorRow}>
+        <View style={styles.logoContainer}>
+          <Image
+            resizeMode="contain"
+            style={styles.logo}
+            source={{
+              uri: order?.distributor?.logo,
+            }}
+          />
+        </View>
+        <View style={styles.orderInfoContainer}>
+          <Text numberOfLines={1} style={styles.distributorName}>
+            {order?.distributor?.name || order?.distributor?.nick_name || 'Nhà cung cấp'}
+          </Text>
+          <Text style={styles.orderTime}>{order.created_time}</Text>
+        </View>
+      </View>
 
-          Mã đơn hàng: `${order.order_id}`
-        </Text>
-        <Text
-          style={styles.orderTime}
-        >
-          {order.created_time}
-        </Text>
-        <Text
-          style={styles.orderTime}
-        >
-          {orderStatuses[order?.order_status]}
-        </Text>
-        <View
-          style={styles.priceContainer}
-        >
+      <View style={styles.footerRow}>
+        <View>
+          <Text style={styles.metaLabel}>Tổng thanh toán</Text>
           {
             order.payment_type !== 2 && (
               <Text style={styles.price}>{formatMoney(order.total_sale)}</Text>
@@ -101,6 +103,8 @@ const OrderItem = ({ order, onPayment, navigation, goBack, onCancelOrder, buyAga
               </Text>
             )
           }
+        </View>
+        <View style={styles.actionRow}>
           <TouchableOpacity
             style={styles.buyAgainContainer}
             onPress={buyAgain}

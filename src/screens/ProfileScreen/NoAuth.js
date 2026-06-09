@@ -9,18 +9,26 @@ import { Image } from '~/common/index'
 import strings from '~/i18n'
 import { NAVIGATION_PHONE_VERIFY, NAVIGATION_TO_LOGIN_SCREEN } from '~/navigation/routes'
 import { user } from '../../assets/constants'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const NoAuth = ({ navigation }) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.notification}>
-        <Image
-          style={styles.imageNotification}
-          source={user}
-        />
-        <Text style={styles.textNotification}>
-          {strings.profileScreen.noAuth.title}
-        </Text>
+        <View style={styles.imageWrap}>
+          <Image
+            style={styles.imageNotification}
+            source={user}
+          />
+        </View>
+        <View style={styles.copy}>
+          <Text style={styles.eyebrow}>ACCOUNT ACCESS</Text>
+          <Text style={styles.title}>Tài khoản 1000CARE</Text>
+          <Text style={styles.textNotification}>
+            {strings.profileScreen.noAuth.title}
+          </Text>
+        </View>
       </View>
       <View style={styles.btnGroup}>
         <TouchableOpacity
@@ -42,55 +50,85 @@ const NoAuth = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: '100%',
-    padding: 18,
-    backgroundColor: '#fff',
+    padding: s(18),
+    margin: s(16),
+    backgroundColor: brandColors.textDark,
+    borderRadius: s(28),
+    ...brandShadow.soft,
   },
   notification: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  imageWrap: {
+    width: s(52),
+    height: s(52),
+    borderRadius: s(18),
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: brandColors.tealLight,
   },
   imageNotification: {
-    width: 18,
-    height: 18,
+    width: s(24),
+    height: s(24),
+    tintColor: brandColors.tealPrimary,
+  },
+  copy: {
+    flex: 1,
+    marginLeft: s(12),
+  },
+  eyebrow: {
+    fontSize: fs(10),
+    lineHeight: fs(14),
+    fontWeight: '900',
+    letterSpacing: 1.4,
+    color: brandColors.goldAccent,
+  },
+  title: {
+    marginTop: s(4),
+    fontSize: fs(20),
+    lineHeight: fs(25),
+    fontWeight: '900',
+    color: brandColors.surface,
   },
   textNotification: {
-    marginLeft: 6,
-    fontSize: 12,
-    fontWeight: '300',
-    color: '#8C8C8C',
+    marginTop: s(6),
+    fontSize: fs(13),
+    lineHeight: fs(19),
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.66)',
 
   },
   btnGroup: {
-    marginTop: 18,
+    marginTop: s(18),
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
   btnSignIn: {
-    width: 122,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: '#0B7B8A',
+    width: '100%',
+    height: s(54),
+    borderRadius: s(18),
+    backgroundColor: brandColors.goldAccent,
 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   textSignIn: {
-    color: '#FFF',
-    fontSize: 14,
-    fontWeight: '600',
+    color: brandColors.textDark,
+    fontSize: fs(14),
+    fontWeight: '800',
   },
   btnSignUp: {
-    marginLeft: 12,
-    width: 122,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: '#FFF',
+    marginLeft: s(12),
+    width: s(122),
+    height: s(42),
+    borderRadius: s(16),
+    backgroundColor: brandColors.surface,
 
-    borderColor: '#0B7B8A',
+    borderColor: brandColors.tealPrimary,
     borderWidth: 1,
     borderStyle: 'solid',
 
@@ -99,8 +137,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textSignUp: {
-    color: '#0B7B8A',
-    fontSize: 14,
+    color: brandColors.tealPrimary,
+    fontSize: fs(14),
     fontWeight: '600',
   },
 })

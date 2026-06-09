@@ -14,6 +14,7 @@ import InputSearchSupplier from './InputSearchSupplier'
 import EmptyItem from '~/common/EmptyItem/index'
 import Colors from '~/common/Colors/Colors'
 import { ic_check_box_checked, ic_check_box_unchecked } from '../../assets/constants'
+import styles from './styles'
 
 const AuthoritySupplier = (props) => {
   const dispatch = useDispatch()
@@ -174,7 +175,7 @@ const AuthoritySupplier = (props) => {
     )
   }
   return(
-    <SafeAreaView style={{ flex:1 }}>
+    <SafeAreaView style={styles.safeArea}>
       <Header
         title={'Ủy quyền nhà cung cấp'}
         leftAction={leftAction}
@@ -184,9 +185,17 @@ const AuthoritySupplier = (props) => {
         iconRight='checkmark-sharp'
         titleStyles={{ marginLeft:0 }}
       />
-      <InputSearchSupplier isEmpty={searchDistributor.length === 0} />
+      <View style={styles.hero}>
+        <Text style={styles.heroEyebrow}>SUPPLIER AUTHORITY</Text>
+        <Text style={styles.heroTitle}>Ủy quyền nhà cung cấp</Text>
+        <Text style={styles.heroSubtitle}>Cho phép nhà cung cấp đã chọn tạo đơn hàng hỗ trợ nhà thuốc của bạn.</Text>
+      </View>
+      <View style={styles.searchPanel}>
+        <InputSearchSupplier isEmpty={searchDistributor.length === 0} />
+      </View>
       <FlatList
-        style={{ marginTop:5 }}
+        style={styles.list}
+        contentContainerStyle={styles.listContent}
         keyExtractor={item => `${item.id}_${item.name}`}
         data={searchDistributor.length > 0 ? listSearchDistri : listDistributors}
         renderItem={renderItem}
@@ -196,17 +205,17 @@ const AuthoritySupplier = (props) => {
           )
         }}
       />
-      <View style={{ paddingVertical: 10, backgroundColor: Colors.white, flexDirection:'row', alignItems:'center' }}>
+      <View style={styles.consentBar}>
         <CheckBox
           checked={checkBox}
           onChange={() => setCheckBox(!checkBox)}
           checkedImage={ic_check_box_checked}
           uncheckedImage={ic_check_box_unchecked}
           label={''}
-          containerStyle={{ marginHorizontal:10 }}
+          containerStyle={styles.consentCheck}
           labelStyle={{ color:'black',fontSize:14 }}
         />
-        <Text numberOfLines={2} style={{marginRight:10, flex:1}} >Tôi đồng ý <Text onPress={()=>setModalAuthority(true)} style={{color:Colors.btn_login,textDecorationLine:'underline'}}>uỷ quyền</Text> cho các nhà cung cấp đã chọn.</Text>
+        <Text numberOfLines={3} style={styles.consentText}>Tôi đồng ý <Text onPress={()=>setModalAuthority(true)} style={styles.consentLink}>uỷ quyền</Text> cho các nhà cung cấp đã chọn.</Text>
       </View>
       {isLoading && <LoadingView />}
       <ErrorView

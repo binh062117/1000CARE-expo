@@ -1,68 +1,76 @@
 import { StyleSheet } from 'react-native'
-import Colors from '../../common/Colors/Colors'
+import { s, fs } from '~/utils/responsive'
+import { brandColors, brandShadow } from '~/design-system/tokens'
 
 const styles = StyleSheet.create({
   mainContainer: {
     display: 'flex',
-    color: Colors.backgroundColor,
+    backgroundColor: brandColors.background,
   },
   profileInfoContainer: {
     display: 'flex',
     flexDirection: 'row',
-    padding: 18,
-    marginVertical: 12,
-    backgroundColor: Colors.white,
+    padding: s(18),
+    marginVertical: s(12),
+    marginHorizontal: s(16),
+    backgroundColor: brandColors.surface,
+    borderRadius: s(24),
+    ...brandShadow.soft,
   },
   infoContainer: {
     display: 'flex',
     justifyContent: 'center',
   },
   avatarImg: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    marginRight: 12,
+    width: s(64),
+    height: s(64),
+    borderRadius: s(32),
+    marginRight: s(12),
   },
   name: {
-    color: Colors.textColor2,
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: brandColors.textDark,
+    fontSize: fs(18),
+    fontWeight: '800',
   },
   email: {
-    color: Colors.textColor3,
-    fontSize: 12,
+    color: brandColors.muted,
+    fontSize: fs(12),
   },
   listItemContainer: {
     display: 'flex',
-    backgroundColor: Colors.white,
+    backgroundColor: brandColors.surface,
+    marginHorizontal: s(16),
+    borderRadius: s(24),
+    overflow: 'hidden',
+    ...brandShadow.soft,
     flexDirection: 'column',
   },
   itemContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
+    paddingHorizontal: s(18),
+    paddingVertical: s(12),
   },
   icon: {
-    marginRight: 12, 
+    marginRight: s(12),
   },
   value: {
-    color: Colors.textColor2,
-    fontSize: 14,
+    color: brandColors.textDark,
+    fontSize: fs(14),
   },
   itemIcon: {
-    width: 24,
-    height: 24,
-    borderRadius: 42,
+    width: s(24),
+    height: s(24),
+    borderRadius: s(42),
   },
   itemIconContainer: {
-    width: 42,
-    height: 42,
-    borderRadius: 42,
+    width: s(42),
+    height: s(42),
+    borderRadius: s(16),
     display: 'flex',
     justifyContent: 'center',
-    marginRight: 12,
+    marginRight: s(12),
     alignItems: 'center',
   },
 })

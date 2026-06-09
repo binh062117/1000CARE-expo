@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     marginBottom: 2, 
     padding: 18,
-    paddingHorizontal: 8,
+    paddingHorizontal: 28,
   },
   textOrderLimit: {
     color:'red',

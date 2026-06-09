@@ -1,0 +1,57 @@
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { s, fs } from '~/utils/responsive';
+import { brandColors } from './tokens';
+
+const variants = {
+  success: {
+    backgroundColor: '#ECFDF5',
+    borderColor: '#D1FAE5',
+    color: brandColors.success,
+  },
+  warning: {
+    backgroundColor: '#FFF7E6',
+    borderColor: '#FFE6B3',
+    color: brandColors.warning,
+  },
+  danger: {
+    backgroundColor: '#FFF1F0',
+    borderColor: '#FFD4D0',
+    color: brandColors.danger,
+  },
+  info: {
+    backgroundColor: brandColors.tealLight,
+    borderColor: '#C9E9ED',
+    color: brandColors.tealDark,
+  },
+};
+
+const StatusBadge = ({ text, variant = 'info', style }) => {
+  const colors = variants[variant] || variants.info;
+
+  return (
+    <View style={[styles.badge, colors, style]}>
+      <Text style={[styles.text, { color: colors.color }]} numberOfLines={1}>
+        {text}
+      </Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  badge: {
+    minHeight: s(28),
+    borderRadius: s(12),
+    borderWidth: 1,
+    paddingHorizontal: s(10),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: fs(10),
+    fontWeight: '800',
+    textTransform: 'uppercase',
+  },
+});
+
+export default StatusBadge;

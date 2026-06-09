@@ -28,6 +28,29 @@ import Colors from '~/common/Colors/Colors'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { NAVIGATION_CONFIRM, NAVIGATION_TO_SPLASH_SCREEN } from '~/navigation/routes'
 import strings from '~/i18n'
+import { convertBirth } from '~/utils/date'
+
+const InfoField = ({ label, placeholder, value, onChangeText, keyboardType, style }) => (
+  <View style={[styles.field, style]}>
+    <Text style={styles.fieldLabel}>{label}</Text>
+    <TextInput
+      placeholder={placeholder}
+      value={value}
+      onChangeText={onChangeText}
+      keyboardType={keyboardType}
+      inputContainerStyle={styles.fieldInput}
+      inputStyle={styles.fieldInputText}
+    />
+  </View>
+)
+
+const FormSection = ({ eyebrow, title, children }) => (
+  <View style={styles.infoCard}>
+    <Text style={styles.sectionEyebrow}>{eyebrow}</Text>
+    <Text style={styles.sectionTitle}>{title}</Text>
+    <View style={styles.sectionBody}>{children}</View>
+  </View>
+)
 
 const list = [
   { name: 'Ảnh cửa hàng', star: true, url: '' },
@@ -368,7 +391,7 @@ const InfoCustomer = props => {
   }, [deleteAcountPharmaStatus])
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: isOpenModal ? 'black' : Colors.backgroundColor, opacity: isOpenModal ? 0.2 : 1 }]}>
+    <SafeAreaView style={[styles.container, { opacity: isOpenModal ? 0.2 : 1 }]}>
       <Header
         title={'Thông tin khách hàng'}
         leftAction={() => props.navigation.pop()}
@@ -378,87 +401,123 @@ const InfoCustomer = props => {
         iconRight='checkmark-sharp'
         titleStyles={{ marginLeft: 0 }}
       />
-      <KeyboardAwareScrollView style={{ flex: 1 }}>
-        <UserInformation
-          isNameShop={isNameShop}
-          setNameShop={setNameShop}
-          isOwnerFullName={isOwnerFullName}
-          setOwnerFullName={setOwnerFullName}
-          setOwnerEmail={setOwnerEmail}
-          isOwnerEmail={isOwnerEmail}
-          showDatePicker={showDatePicker}
-          isDate={isDate}
-          setPhone={setPhone}
-          isPhone={isPhone}
-        />
-        {/* <LegalInformation
-          list={list}
-          openModal={openModal}
-        /> */}
-        <InvoiceInformation
-          setInvoiceName={setInvoiceName}
-          invoiceName={invoiceName}
-          setInvoiceAddress={setInvoiceAddress}
-          invoiceAddress={invoiceAddress}
-          taxCode={taxCode}
-          setTaxCode={setTaxCode}
-        />
-        <View style={styles.mainContainer}>
-          <View style={[styles.formContainer, styles.mt12]}>
-            <View style={styles.formItemContainer}>
-              <Text style={[styles.labelStyle]}>{strings.addAddress.placeHolderProvince}</Text>
-              <ModalSelect
-                style={[styles.inputContainerStyle, styles.noBorder]}
-                textStyle={styles.modalSelectPlaceHolder}
-                onChange={(province) => {
-
-                  setProvince(province)
-                  setDistrict({})
-                  setWard({})
-                }}
-                label={province?.name || strings.addAddress.placeHolderProvince}
-                data={provinces}
-              />
-            </View>
-            <View style={styles.formItemContainer}>
-              <Text style={[styles.labelStyle]}>{strings.addAddress.placeHolderDistrict}</Text>
-              <ModalSelect
-                style={[styles.inputContainerStyle, styles.noBorder]}
-                textStyle={styles.modalSelectPlaceHolder}
-                label={district?.name || strings.addAddress.placeHolderDistrict}
-                data={districts}
-                onChange={(district) => {
-                  setDistrict(district)
-                  setWard({})
-                }}
-                disabled={districts.length > 0 ? false : true}
-              />
-            </View>
-            <View style={styles.formItemContainer}>
-              <Text style={[styles.labelStyle]}>{strings.addAddress.placeHolderWards}</Text>
-              <ModalSelect
-                label={ward?.name || strings.addAddress.placeHolderWards}
-                textStyle={styles.modalSelectPlaceHolder}
-                style={[styles.inputContainerStyle, styles.noBorder]}
-                data={wards}
-                onChange={(ward) => {
-                  setWard(ward)
-                }}
-                disabled={wards.length > 0 ? false : true}
-              />
-            </View>
-            {/* <View style={styles.formItemContainer}>
-              <TextInput 
-                value={address}
-                onChangeText={(value) => setAddress(value)}
-                inputContainerStyle={styles.inputContainerStyle}
-                labelStyle={styles.labelStyle}
-                label={strings.addAddress.placeHolderAddress')}
-              />
-            </View> */}
-          </View>
+      <KeyboardAwareScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.hero}>
+          <Text style={styles.heroEyebrow}>CUSTOMER PROFILE</Text>
+          <Text style={styles.heroTitle}>Hồ sơ nhà thuốc</Text>
+          <Text style={styles.heroSubtitle}>Cập nhật thông tin cửa hàng, chủ tài khoản và dữ liệu xuất hóa đơn.</Text>
         </View>
+
+        <FormSection eyebrow="STORE" title="Thông tin cửa hàng">
+          <InfoField
+            label="Tên cửa hàng"
+            placeholder="Nhập tên cửa hàng"
+            value={isNameShop}
+            onChangeText={setNameShop}
+          />
+          <InfoField
+            label="Chủ cửa hàng"
+            placeholder="Nhập tên chủ cửa hàng"
+            value={isOwnerFullName}
+            onChangeText={setOwnerFullName}
+          />
+          <InfoField
+            label="Email"
+            placeholder="email@domain.com"
+            value={isOwnerEmail}
+            onChangeText={setOwnerEmail}
+            keyboardType="email-address"
+          />
+          <View style={styles.twoColumn}>
+            <TouchableOpacity style={[styles.field, styles.columnField]} onPress={showDatePicker} activeOpacity={0.84}>
+              <Text style={styles.fieldLabel}>Ngày sinh</Text>
+              <View style={styles.readonlyInput}>
+                <Text style={styles.readonlyText}>{isDate ? convertBirth(isDate, 'DD/MM/YYYY HH:mm:ss') : '__/__/____'}</Text>
+              </View>
+            </TouchableOpacity>
+            <InfoField
+              label="Số điện thoại"
+              placeholder="Số điện thoại"
+              value={isPhone}
+              onChangeText={setPhone}
+              keyboardType="phone-pad"
+              style={styles.columnFieldRight}
+            />
+          </View>
+        </FormSection>
+
+        <FormSection eyebrow="INVOICE" title="Thông tin xuất hóa đơn">
+          <InfoField
+            label="Tên trên hóa đơn"
+            placeholder="Tên"
+            value={invoiceName}
+            onChangeText={setInvoiceName}
+          />
+          <InfoField
+            label="Địa chỉ"
+            placeholder="Số nhà, đường phố..."
+            value={invoiceAddress}
+            onChangeText={setInvoiceAddress}
+          />
+          <InfoField
+            label="Mã số thuế"
+            placeholder="MST"
+            value={taxCode}
+            onChangeText={setTaxCode}
+          />
+        </FormSection>
+
+        <FormSection eyebrow="ADDRESS" title="Khu vực xuất hóa đơn">
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>{strings.addAddress.placeHolderProvince}</Text>
+            <ModalSelect
+              style={styles.selectInput}
+              textStyle={styles.modalSelectPlaceHolder}
+              onChange={(province) => {
+                setProvince(province)
+                setDistrict({})
+                setWard({})
+              }}
+              label={province?.name || strings.addAddress.placeHolderProvince}
+              data={provinces}
+            />
+          </View>
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>{strings.addAddress.placeHolderDistrict}</Text>
+            <ModalSelect
+              style={styles.selectInput}
+              textStyle={styles.modalSelectPlaceHolder}
+              label={district?.name || strings.addAddress.placeHolderDistrict}
+              data={districts}
+              onChange={(district) => {
+                setDistrict(district)
+                setWard({})
+              }}
+              disabled={districts.length > 0 ? false : true}
+            />
+          </View>
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>{strings.addAddress.placeHolderWards}</Text>
+            <ModalSelect
+              label={ward?.name || strings.addAddress.placeHolderWards}
+              textStyle={styles.modalSelectPlaceHolder}
+              style={styles.selectInput}
+              data={wards}
+              onChange={(ward) => {
+                setWard(ward)
+              }}
+              disabled={wards.length > 0 ? false : true}
+            />
+          </View>
+        </FormSection>
+
         <TouchableOpacity
+          style={styles.deleteButton}
           disabled={disable}
           onPress={() => deleteAccounts()}
         >

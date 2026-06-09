@@ -62,19 +62,23 @@ const ReferralScreen = ({ navigation, route }) => {
     <SafeAreaView
       style={styles.container}
     >
-      <KeyboardAwareScrollView style={styles.container}>
+      <KeyboardAwareScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContent}
+      >
         <Header
           title={'Người giới thiệu'}
           leftAction={() => navigation.pop()}
           iconLeft={back}
         />
-        <View
-          style={{
-            height: 12,
-            backgroundColor: Colors.backgroundColor,
-          }}
-        />
+        <View style={styles.hero}>
+          <Text style={styles.heroEyebrow}>REFERRAL</Text>
+          <Text style={styles.heroTitle}>Người giới thiệu</Text>
+          <Text style={styles.heroSubtitle}>Liên kết tài khoản với người giới thiệu để hoàn tất hồ sơ nhà thuốc.</Text>
+        </View>
         <View style={styles.containerConfirm}>
+          <Text style={styles.cardEyebrow}>{existReferral ? 'ĐÃ LIÊN KẾT' : 'CHƯA CÓ THÔNG TIN'}</Text>
+          <Text style={styles.cardTitle}>{existReferral ? 'Mã giới thiệu hiện tại' : 'Nhập số điện thoại người giới thiệu'}</Text>
           <Text style={styles.message}>{message}</Text>
           {
             !existReferral ? (<>
@@ -96,10 +100,8 @@ const ReferralScreen = ({ navigation, route }) => {
               </View>
               <Button
                 text={'Xác nhận'}
-                styleButton={{
-                  borderRadius: 35,
-                }}
-                styleText={{ fontWeight: '100' }}
+                styleButton={styles.confirmButton}
+                styleText={styles.confirmButtonText}
                 styleView={styles.buttonConfirm}
                 onPressEvent={submit}
               />

@@ -150,6 +150,11 @@ const TopupScreen = (props) => {
           iconLeft={back}
           leftAction={() => props.navigation.goBack()}
         />
+        <View style={styles.hero}>
+          <Text style={styles.heroEyebrow}>TOPUP CENTER</Text>
+          <Text style={styles.heroTitle}>Nạp điểm mua hàng</Text>
+          <Text style={styles.heroSubtitle}>Chọn mệnh giá phù hợp và xem điểm thưởng trước khi xác nhận.</Text>
+        </View>
         <View style={styles.viewMoney}>
           <FlatList
             style={{ flex: 1 }}

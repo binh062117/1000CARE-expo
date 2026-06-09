@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, SafeAreaView } from 'react-native'
+import { FlatList, SafeAreaView, View } from 'react-native'
 import Header from '~/common/Header/index'
 import { back } from '~/assets/constants'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,10 +7,11 @@ import { getListDistributorAll, getPharmacyInfo, getStatusAddFavouriteSupplier, 
 import { getAllDistributors, requestGetPharmacyInfo, getAddFavouriteSupplier, resetAddFavouriteSupplier, resetSearchDistributor } from '~/store/actions'
 import Item from './Item'
 import Status from '~/common/Status/Status'
-import { LoadingView } from '~/common'
+import { LoadingView, Text } from '~/common'
 import ErrorView from '~/common/ErrorView/index'
 import InputSearchSupplier from './InputSearchSupplier'
 import EmptyItem from '~/common/EmptyItem/index'
+import styles from './styles'
 
 const FavouriteSupplier = (props) => {
   const dispatch = useDispatch()
@@ -59,7 +60,7 @@ const FavouriteSupplier = (props) => {
   }
 
   return(
-    <SafeAreaView style={{ flex:1 }}>
+    <SafeAreaView style={styles.safeArea}>
       <Header
         title={'Nhà cung cấp yêu thích'}
         leftAction={leftAction}
@@ -69,9 +70,17 @@ const FavouriteSupplier = (props) => {
         iconRight='checkmark-sharp'
         titleStyles={{ marginLeft:0 }}
       />
-      <InputSearchSupplier />
+      <View style={styles.hero}>
+        <Text style={styles.heroEyebrow}>PREFERRED SUPPLIER</Text>
+        <Text style={styles.heroTitle}>Nhà cung cấp yêu thích</Text>
+        <Text style={styles.heroSubtitle}>Chọn một nhà cung cấp mặc định để ưu tiên dữ liệu sản phẩm và đơn hàng.</Text>
+      </View>
+      <View style={styles.searchPanel}>
+        <InputSearchSupplier />
+      </View>
       <FlatList
-        style={{ marginTop:5 }}
+        style={styles.list}
+        contentContainerStyle={styles.listContent}
         data={(listSearchDistri == null || listSearchDistri == undefined) ? [] : listSearchDistri.length > 0 ? listSearchDistri : listDistri}
         renderItem={(item) => {
           return(
